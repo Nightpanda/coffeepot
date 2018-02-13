@@ -1,4 +1,4 @@
-(defproject reframe "0.1.0-SNAPSHOT"
+(defproject coffeepot "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.908"]
                  [reagent "0.7.0"]
@@ -28,7 +28,7 @@
    [{:id           "dev"
      :source-paths ["src/cljs"]
      :figwheel     {:on-jsload "coffeepot.core/mount-root"}
-     :compiler     {:main                 reframe.core
+     :compiler     {:main                 coffeepot.core
                     :output-to            "resources/public/js/compiled/app.js"
                     :output-dir           "resources/public/js/compiled/out"
                     :asset-path           "js/compiled/out"

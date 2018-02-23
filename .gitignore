@@ -13,3 +13,4 @@ pom.xml.asc
 .nrepl-port
 *.log
 /resources/public/js/compiled/
+/public/js/compiled/

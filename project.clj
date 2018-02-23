@@ -5,7 +5,8 @@
                  [re-frame "0.10.2"]
                  [com.andrewmcveigh/cljs-time "0.5.0"]
                  [org.clojure/core.async "0.2.391"]
-                 [re-com "2.1.0"]]
+                 [re-com "2.1.0"]
+                 [re-frisk "0.5.3"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]]
 
@@ -33,7 +34,8 @@
                     :output-dir           "resources/public/js/compiled/out"
                     :asset-path           "js/compiled/out"
                     :source-map-timestamp true
-                    :preloads             [devtools.preload]
+                    :preloads             [devtools.preload
+                                           re-frisk.preload]
                     :external-config      {:devtools/config {:features-to-install :all}}
                     }}
 

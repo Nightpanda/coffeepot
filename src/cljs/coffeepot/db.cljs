@@ -1,4 +1,6 @@
 (ns coffeepot.db)
 
 (def default-db
-  {:name "Coffeepot!"})
+  {:name "Coffeepot!"
+   :firebase-app nil
+   :auth-listener false})

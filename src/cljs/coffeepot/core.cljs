@@ -1,9 +1,9 @@
 (ns coffeepot.core
   (:require [reagent.core :as reagent]
             [re-frame.core :as re-frame]
-            [coffeepot.events :as events]
-            [coffeepot.views :as views]
-            [coffeepot.config :as config]))
+            [coffeepot.app :as app]
+            [coffeepot.config :as config]
+            [coffeepot.events :as events]))
 
 
 (defn dev-setup []
@@ -13,7 +13,7 @@
 
 (defn mount-root []
   (re-frame/clear-subscription-cache!)
-  (reagent/render [views/main-panel]
+  (reagent/render [app/main-panel]
                   (.getElementById js/document "app")))
 
 (defn ^:export init []

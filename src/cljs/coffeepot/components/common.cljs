@@ -24,11 +24,29 @@
    :style (:header-brand-item styles/styles)
    :child item])
 
+(defn header-search-item [placeholder data-source]
+  [re-com/typeahead
+   :style (:header-search-item styles/styles)
+   :placeholder placeholder
+   :data-source data-source])
+
+(defn header-menu-item [text]
+  [re-com/hyperlink
+   :style (:header-menu-item styles/styles)
+   :label text])
+
 (defn header [& sections]
   [re-com/h-box
    :style (:header styles/styles)
    :children (for [section sections]
                ^{:key section} section)])
+
+(defn app-content [& elements]
+  [re-com/h-box
+   :style (:app-content styles/styles)
+   :size "1"
+   :children (for [element elements]
+               ^{:key element} element)])
 
 (defn content [& elements]
   [re-com/h-box

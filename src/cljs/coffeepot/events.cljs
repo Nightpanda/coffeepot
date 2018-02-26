@@ -12,6 +12,11 @@
  (fn [db  [_ status]]
    (assoc db :auth-listener status)))
 
+(re-frame/reg-event-db
+ ::user-logged-in
+ (fn [db  [_ logged-in]]
+   (assoc-in db [:user :logged-in] logged-in)))
+
 (def firebase-config
    #js {:apiKey "AIzaSyABjP8bTTvEfy1n_pgR8oiqFBCn6hr4CP8"
         :authDomain "coffeepot-d13ea.firebaseapp.com"

@@ -42,7 +42,7 @@
     {:id           "min"
      :source-paths ["src/cljs"]
      :compiler     {:main            coffeepot.core
-                    :output-to       "public/js/compiled/app.js"
+                    :output-to       "resources/public/js/compiled/app.js"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false

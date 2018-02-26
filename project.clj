@@ -45,9 +45,8 @@
                     :output-to       "public/js/compiled/app.js"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
-                    :pretty-print    false}}
-
-
+                    :pretty-print    false
+                    :externs ["externs/firebase.js"]}}
     ]}
 
   )

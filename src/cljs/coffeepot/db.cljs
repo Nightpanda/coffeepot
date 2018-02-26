@@ -4,4 +4,5 @@
   {:name "Coffeepot!"
    :firebase-app nil
    :auth-listener false
-   :user {:username "User Name"}})
+   :user {:username "User Name"
+          :logged-in false}})

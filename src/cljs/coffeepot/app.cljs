@@ -3,7 +3,8 @@
             [re-com.core :as re-com]
             [coffeepot.subs :as subs]
             [coffeepot.events :as events]
-            [coffeepot.components.common :as c]))
+            [coffeepot.components.common :as c]
+            [coffeepot.views.coffee.core :as coffee]))
 
 (defn provider []
   (new js/firebase.auth.GoogleAuthProvider))
@@ -29,8 +30,8 @@
          (.auth @firebase-app)
          (fn auth-state-changed [user-obj]
            (if (nil? user-obj)
-             (println "logged out!")
-             (println "logged in! Hi")))
+             (re-frame/dispatch [::events/user-logged-in false])
+             (re-frame/dispatch [::events/user-logged-in true])))
          (fn auth-error [error]
            (js/console.log error))))
       (println "Firebase app not present or listener already active!"))))
@@ -49,10 +50,7 @@
                [c/header-section
                 [c/header-item
                  [c/button "Login with Google" (fn login-click [e]
-                                                 (google-sign-in))]]
-                [c/header-item
-                 [c/button "Logout" (fn login-click [e]
-                                      (logout-auth))]]]]
+                                                 (google-sign-in))]]]]
               [c/content
                [c/phone-preview-box
                 "1" "images/coffeepotphone.png"]
@@ -63,9 +61,12 @@
 (defn main-panel []
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])
         listener-alive? (re-frame/subscribe [::subs/auth-listener])
-        name (re-frame/subscribe [::subs/name])]
+        name (re-frame/subscribe [::subs/name])
+        user (re-frame/subscribe [::subs/user])]
     (fn []
       (if (false? @listener-alive?)
         (add-auth-listener))
       (if (some? @firebase-app)
-        [login-page]))))
+        (if (:logged-in @user)
+          [coffee/app-main]
+          [login-page])))))

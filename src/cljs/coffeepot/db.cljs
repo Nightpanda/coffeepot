@@ -3,4 +3,5 @@
 (def default-db
   {:name "Coffeepot!"
    :firebase-app nil
-   :auth-listener false})
+   :auth-listener false
+   :user {:username "User Name"}})

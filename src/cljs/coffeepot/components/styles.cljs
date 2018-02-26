@@ -6,7 +6,8 @@
    :header-border-color "#747474"
    :title-color "#f9f9f9"
    :text-color "#1d1b1b"
-   :text-color-alt "#f9f9f9"})
+   :text-color-alt "#f9f9f9"
+   :app-content-bg-color "#e6e4e5"})
 
 (def styles
   {:header-section {:align-items "center"}
@@ -15,16 +16,22 @@
    :header-brand-item {:font-size "20px"
                        :line-height "0"
                        :color (:text-color colors)}
+   :header-search-item {}
+   :header-menu-item {:font-size "20px"
+                      :line-height "0"
+                      :color (:header-title-color colors)}
    :header {:background (:headerfooter-bg-color colors)
             :height "6em"
             :justify-content "space-between"
-            :padding "1em 1em 1em 8em"
+            :padding "1em 8em 1em 8em"
             :color (:header-title-color colors)
             :border-bottom (str "1px solid " (:header-border-color colors))}
    :title {:color (:text-color colors)}
    :title-box {:margin "1em 0em 1em 2em"
                :color (:title-color colors)
                :text-shadow (str "2px 2px " (:text-color colors))}
+   :app-content {:padding "1em"
+                 :background (:app-content-bg-color colors)}
    :content {:padding "1em"
              :background-size "cover"
              :background-position "center"

@@ -5,14 +5,17 @@
 (re-frame/reg-event-db
  ::initialize-db
  (fn  [_ _]
-   db/default-db
-   ))
+   db/default-db))
 
 (re-frame/reg-event-db
  ::change-auth-listener-status
  (fn [db  [_ status]]
-   (assoc db :auth-listener status)
-   ))
+   (assoc db :auth-listener status)))
+
+(re-frame/reg-event-db
+ ::user-logged-in
+ (fn [db  [_ logged-in]]
+   (assoc-in db [:user :logged-in] logged-in)))
 
 (def firebase-config
    #js {:apiKey "AIzaSyABjP8bTTvEfy1n_pgR8oiqFBCn6hr4CP8"

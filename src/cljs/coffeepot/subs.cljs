@@ -15,3 +15,8 @@
  ::auth-listener
  (fn [db]
    (:auth-listener db)))
+
+(re-frame/reg-sub
+ ::user
+ (fn [db]
+   (:user db)))

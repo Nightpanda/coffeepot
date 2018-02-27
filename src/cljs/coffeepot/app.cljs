@@ -4,7 +4,8 @@
             [coffeepot.subs :as subs]
             [coffeepot.events :as events]
             [coffeepot.components.common :as c]
-            [coffeepot.views.coffee.core :as coffee]))
+            [coffeepot.views.coffee.core :as coffee]
+            [coffeepot.localization :refer [localize-with-substitute]]))
 
 (defn provider []
   (new js/firebase.auth.GoogleAuthProvider))
@@ -48,8 +49,18 @@
                  [c/header-brand-item
                   [c/title "Coffeepot"]]]]
                [c/header-section
+                [c/header-item 
+                 [:img {:src "https://lipis.github.io/flag-icon-css/flags/1x1/fi.svg" 
+                  :height "20px" 
+                  :width "20px"
+                  :on-click (fn [] (re-frame/dispatch [::events/change-locale :fi]))}]]
+                [c/header-item 
+                 [:img {:src "https://lipis.github.io/flag-icon-css/flags/1x1/gb.svg" 
+                  :height "20px" 
+                  :width "20px"
+                  :on-click (fn [] (re-frame/dispatch [::events/change-locale :en]))}]]
                 [c/header-item
-                 [c/button "Login with Google" (fn login-click [e]
+                 [c/button (localize-with-substitute :login "Google") (fn login-click [e]
                                                  (google-sign-in))]]]]
               [c/content
                [c/phone-preview-box

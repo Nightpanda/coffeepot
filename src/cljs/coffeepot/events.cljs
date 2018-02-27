@@ -17,6 +17,11 @@
  (fn [db  [_ logged-in]]
    (assoc-in db [:user :logged-in] logged-in)))
 
+(re-frame/reg-event-db
+ ::change-locale
+ (fn [db  [_ locale]]
+   (assoc db :locale locale)))
+
 (def firebase-config
    #js {:apiKey "AIzaSyABjP8bTTvEfy1n_pgR8oiqFBCn6hr4CP8"
         :authDomain "coffeepot-d13ea.firebaseapp.com"

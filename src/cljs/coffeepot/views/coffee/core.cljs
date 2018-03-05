@@ -3,7 +3,8 @@
             [re-com.core :as re-com]
             [coffeepot.components.common :as c]
             [coffeepot.events :as events]
-            [coffeepot.subs :as subs]))
+            [coffeepot.subs :as subs]
+            [coffeepot.localization :refer [localize]]))
 
 (defn logout-auth []
   (println "logging out")
@@ -44,7 +45,7 @@
                         ["Paulig" "Juhla Mokka" "Brazil" "Kulta Katriina"])]]]
                    [c/header-section
                     [c/header-item
-                     [c/button "Logout" (fn login-click [e]
+                     [c/button (localize :logout) (fn login-click [e]
                                       (logout-auth))]]]]
                   [c/app-content
                    [:p (str "Hei käyttäjä " (:username @user))]]]])))

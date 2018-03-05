@@ -20,3 +20,8 @@
  ::user
  (fn [db]
    (:user db)))
+
+(re-frame/reg-sub
+ ::locale
+ (fn [db]
+   (:locale db)))

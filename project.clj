@@ -1,8 +1,11 @@
 (defproject coffeepot "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.908"]
-                 [reagent "0.7.0"]
-                 [re-frame "0.10.2"]
+                 [reagent "0.7.0" :exclusions [cljsjs/react cljsjs/react-dom]]
+                 [re-frame "0.10.2" :exclusions [cljsjs/react cljsjs/react-dom]]
+                 [cljs-react-material-ui "0.2.48"]
+                 [cljsjs/react "15.6.1-1"]
+                 [cljsjs/react-dom "15.6.1-1"]
                  [com.andrewmcveigh/cljs-time "0.5.0"]
                  [org.clojure/core.async "0.2.391"]
                  [re-com "2.1.0"]
@@ -48,6 +51,4 @@
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false
                     :externs ["externs/firebase.js"]}}
-    ]}
-
-  )
+    ]})

@@ -21,11 +21,9 @@
                       :line-height "0"
                       :color (:header-title-color colors)}
    :header {:background (:headerfooter-bg-color colors)
-            :height "6em"
-            :justify-content "space-between"
-            :padding "1em 8em 1em 8em"
-            :color (:header-title-color colors)
-            :border-bottom (str "1px solid " (:header-border-color colors))}
+            :height "80px"
+            :padding "0em 0em 0em 8em"
+            :color (:header-title-color colors)}
    :title {:color (:text-color colors)}
    :title-box {:margin "1em 0em 1em 2em"
                :color (:title-color colors)

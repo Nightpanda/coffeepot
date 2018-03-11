@@ -1,48 +1,26 @@
 (ns coffeepot.components.common
   (:require [re-com.core :as re-com]
-            [coffeepot.components.styles :as styles]))
+            [re-com.validate :refer [vector-of-maps?] :refer-macros [validate-args-macro]]
+            [reagent.core :as r]
+            [cljsjs.material-ui]
+            [cljs-react-material-ui.reagent :as ui]
+            [cljs-react-material-ui.icons :as ic]
+            [coffeepot.localization :refer [localize localize-with-substitute]]
+            [coffeepot.components.styles :as styles]
+            [clojure.string :as str]))
 
-(defn button [label on-click]
-  [re-com/button
-   :style {}
-   :label label
-   :on-click on-click])
-
-(defn header-section [& elements]
-  [re-com/h-box
-   :style (:header-section styles/styles)
-   :children (for [element elements]
-               ^{:key element} element)])
-
-(defn header-item [item]
+(defn no-brews [text]
   [re-com/box
-   :style (:header-item styles/styles)
-   :child item])
-
-(defn header-brand-item [item]
-  [re-com/box
-   :style (:header-brand-item styles/styles)
-   :child item])
-
-(defn header-search-item [placeholder data-source]
-  [re-com/typeahead
-   :style (:header-search-item styles/styles)
-   :placeholder placeholder
-   :data-source data-source])
-
-(defn header-menu-item [text]
-  [re-com/hyperlink
-   :style (:header-menu-item styles/styles)
-   :label text])
-
-(defn header [& sections]
-  [re-com/h-box
-   :style (:header styles/styles)
-   :children (for [section sections]
-               ^{:key section} section)])
+   :align :center
+   :child [re-com/title
+           :margin-top "2em"
+           :margin-bottom "2em"
+           :style (:no-brews-greeting styles/styles)
+           :label (localize :no-brews)
+           :level :level1]])
 
 (defn app-content [& elements]
-  [re-com/h-box
+  [re-com/v-box
    :style (:app-content styles/styles)
    :size "1"
    :children (for [element elements]

@@ -6,6 +6,7 @@
             [cljs-react-material-ui.reagent :as ui]
             [cljs-react-material-ui.icons :as ic]
             [coffeepot.components.common :as c]
+            [coffeepot.components.navheader :as nav]
             [coffeepot.events :as events]
             [coffeepot.subs :as subs]
             [coffeepot.localization :refer [localize localize-with-substitute]]
@@ -19,40 +20,23 @@
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
     (.signInWithPopup (.auth @firebase-app) (provider))))
 
-(defn front-page-bar []
-  (fn []
-    [ui/toolbar-group
-     [ui/flat-button {:icon
-                        (r/as-element [:img {:src "https://lipis.github.io/flag-icon-css/flags/1x1/fi.svg"
-                                             :height "20px"
-                                             :width "30px"}])
-                        :primary true
-                        :on-click (fn [] (re-frame/dispatch [::events/change-locale :fi]))}]
-     [ui/flat-button {:icon
-                        (r/as-element [:img {:src "https://lipis.github.io/flag-icon-css/flags/1x1/gb.svg"
-                                             :height "20px"
-                                             :width "30px"}])
-                        :primary true
-                        :on-click (fn [] (re-frame/dispatch [::events/change-locale :en]))}]
-     [ui/raised-button {:label (localize-with-substitute :login (localize :google))
-                        :primary true
-                        :on-click (fn login-click [e]
-                                    (google-sign-in))}]]))
-
 (defn login-page []
   (fn []
     [re-com/v-box
      :min-height "100vh"
-     :children [[ui/app-bar {:title (localize :app-title)
-                             :icon-style-left {:margin "0em"
-                                               :padding "0em 2em 0em 8em"}
-                             :title-style {:font-size "3em"}
-                             :style {:align-items "center"}
-                             :icon-element-left
-                             ;;(r/as-element [:img {:src "images/weblogod.png" :height "80px" :width "80px"}])
-                             (r/as-element [:img {:src "images/brandlogo_s_web.png" :height "80px"}])
-                             :icon-element-right
-                             (r/as-element [front-page-bar])}]
+     :children [[nav/navigation-header
+                 :site-logo "images/brandlogo_s_web.png"
+                 :site-title (localize :app-title)
+                 :navigation-right [{:icon "https://lipis.github.io/flag-icon-css/flags/1x1/fi.svg"
+                                     :on-click (fn [] (re-frame/dispatch [::events/change-locale :fi]))}
+                                    {:icon "https://lipis.github.io/flag-icon-css/flags/1x1/gb.svg"
+                                     :on-click (fn [] (re-frame/dispatch [::events/change-locale :en]))}]
+                 :rightmost-buttons [{:label (localize :signup)
+                                      :on-click (fn login-click [e]
+                                                  (println "Sign up"))}
+                                     {:label (localize-with-substitute :login (localize :google))
+                                      :on-click (fn login-click [e]
+                                                  (google-sign-in))}]]
                 [c/content
                  [c/phone-preview-box
                   "1" "images/coffeepotphone.png"]

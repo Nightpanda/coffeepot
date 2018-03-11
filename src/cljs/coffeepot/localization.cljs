@@ -13,8 +13,10 @@
                       :recipes "Reseptit"
                       :search "Hae"
                       :google "Google"
+                      :signup "Rekisteröidy"
                       :login "Kirjaudu sisään {1}:lla"
                       :logout "Kirjaudu ulos"
+                      :no-brews "Olisiko aika keittää kahvit?"
                       }
                  :en {
                       :app-title "Coffeepot"
@@ -25,8 +27,10 @@
                       :recipes "Recipes"
                       :search "Search"
                       :google "Google"
+                      :signup "Sign up"
                       :login "Login with {1}"
                       :logout "Logout"
+                      :no-brews "Is it time to brew a cup coffee?"
                       }
                  :tongue/fallback :fi
                  })

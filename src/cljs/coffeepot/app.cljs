@@ -42,5 +42,4 @@
       (if (some? @firebase-app)
         (if (:logged-in @user)
           [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [coffee/app-main]]
-          [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [front/login-page]]
-          )))))
+          [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [front/login-page]])))))

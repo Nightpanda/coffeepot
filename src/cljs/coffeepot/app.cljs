@@ -6,6 +6,7 @@
             [cljs-react-material-ui.core :refer [mui-theme-provider]]
             [cljs-react-material-ui.reagent :as ui]
             [cljs-react-material-ui.icons :as ic]
+            [taoensso.timbre :as timbre :refer-macros [debug info warn error]]
             [coffeepot.subs :as subs]
             [coffeepot.events :as events]
             [coffeepot.components.common :as c]
@@ -15,7 +16,7 @@
             [coffeepot.theme.theme :as theme]))
 
 (defn add-auth-listener []
-  (println "Adding auth listener!")
+  (debug "Adding auth listener!")
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])
         listener-alive? (re-frame/subscribe [::subs/auth-listener])]
     (if (and (not @listener-alive?) (some? @firebase-app))
@@ -28,8 +29,8 @@
              (re-frame/dispatch [::events/user-logged-in false])
              (re-frame/dispatch [::events/user-logged-in true])))
          (fn auth-error [error]
-           (js/console.log error))))
-      (println "Firebase app not present or listener already active!"))))
+           (debug error))))
+      (debug "Firebase app not present or listener already active!"))))
 
 (defn main-panel []
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])

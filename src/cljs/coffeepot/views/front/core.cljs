@@ -5,6 +5,7 @@
             [cljsjs.material-ui]
             [cljs-react-material-ui.reagent :as ui]
             [cljs-react-material-ui.icons :as ic]
+            [taoensso.timbre :as timbre :refer-macros [debug info warn error]]
             [coffeepot.components.common :as c]
             [coffeepot.components.navheader :as nav]
             [coffeepot.events :as events]
@@ -16,7 +17,7 @@
   (new js/firebase.auth.GoogleAuthProvider))
 
 (defn google-sign-in []
-  (println "loggin in")
+  (debug "loggin in")
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
     (.signInWithPopup (.auth @firebase-app) (provider))))
 
@@ -33,7 +34,7 @@
                                      :on-click (fn [] (re-frame/dispatch [::events/change-locale :en]))}]
                  :rightmost-buttons [{:label (localize :signup)
                                       :on-click (fn login-click [e]
-                                                  (println "Sign up"))}
+                                                  (debug "Sign up"))}
                                      {:label (localize-with-substitute :login (localize :google))
                                       :on-click (fn login-click [e]
                                                   (google-sign-in))}]]

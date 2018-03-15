@@ -5,6 +5,7 @@
             [cljsjs.material-ui]
             [cljs-react-material-ui.reagent :as ui]
             [cljs-react-material-ui.icons :as ic]
+            [taoensso.timbre :as timbre :refer-macros [debug info warn error]]
             [coffeepot.components.common :as c]
             [coffeepot.components.navheader :as nav]
             [coffeepot.events :as events]
@@ -13,7 +14,7 @@
             [coffeepot.components.styles :as styles]))
 
 (defn logout-auth []
-  (println "logging out")
+  (debug "logging out")
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
       (.signOut (.auth @firebase-app))))
 

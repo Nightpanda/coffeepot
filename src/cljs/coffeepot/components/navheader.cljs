@@ -5,9 +5,10 @@
             [cljsjs.material-ui]
             [cljs-react-material-ui.reagent :as ui]
             [cljs-react-material-ui.icons :as ic]
-            [coffeepot.components.styles :as styles]
+            [taoensso.timbre :as timbre :refer-macros [debug info warn error]]
             [clojure.string :as str]
-            [clojure.set :as set]))
+            [clojure.set :as set]
+            [coffeepot.components.styles :as styles]))
 
 (def navigation-menu-args
   [{:name :navigation-tabs
@@ -55,7 +56,7 @@
 
 (defn nav-item [label icon]
   (let [on-click (fn []
-                   (println label))]
+                   (debug label))]
     [re-com/h-box
      :class "nav-item"
      :children [[re-com/box
@@ -94,7 +95,7 @@
                  [ui/icon-menu {:icon-button-element (r/as-element
                                                       [ui/icon-button (r/as-element [ic/navigation-menu])])
                                 :on-change (fn [event value]
-                                             (println value))}
+                                             (debug value))}
                   (for [item menu-items]
                     [ui/menu-item {:key (:label item) :value (:label item) :primaryText (:label item)}])]]
                 (for [nav-tab navigation-tabs]

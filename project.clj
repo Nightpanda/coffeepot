@@ -10,6 +10,7 @@
                  [org.clojure/core.async "0.2.391"]
                  [re-com "2.1.0"]
                  [re-frisk "0.5.3"]
+                 [com.taoensso/timbre "4.10.0"]
                  [tongue "0.2.3"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]]

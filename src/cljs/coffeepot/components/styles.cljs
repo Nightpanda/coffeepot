@@ -10,26 +10,13 @@
    :app-content-bg-color "#e6e4e5"})
 
 (def styles
-  {:header-section {:align-items "center"}
-   :header-item {:padding "5px 15px"
-                 :font-size "12px"}
-   :header-brand-item {:font-size "20px"
-                       :line-height "0"
-                       :color (:text-color colors)}
-   :header-search-item {}
-   :header-menu-item {:font-size "20px"
-                      :line-height "0"
-                      :color (:header-title-color colors)}
-   :header {:background (:headerfooter-bg-color colors)
-            :height "6em"
-            :justify-content "space-between"
-            :padding "1em 8em 1em 8em"
-            :color (:header-title-color colors)
-            :border-bottom (str "1px solid " (:header-border-color colors))}
+  {:header-search-item {}
    :title {:color (:text-color colors)}
    :title-box {:margin "1em 0em 1em 2em"
                :color (:title-color colors)
                :text-shadow (str "2px 2px " (:text-color colors))}
+   :no-brews-greeting {:color "#666"
+                       :text-shadow "0px -1px 0px rgba(0,0,0,.5)"}
    :app-content {:padding "1em"
                  :background (:app-content-bg-color colors)}
    :content {:padding "1em"

@@ -1,15 +1,18 @@
 (ns coffeepot.core
   (:require [reagent.core :as reagent]
             [re-frame.core :as re-frame]
+            [taoensso.timbre :as timbre :refer-macros [debug info warn error]]
             [coffeepot.app :as app]
             [coffeepot.config :as config]
             [coffeepot.events :as events]))
 
+(defn timbre-setup []
+  (timbre/set-level! :info))
 
 (defn dev-setup []
   (when config/debug?
-    (enable-console-print!)
-    (println "dev mode")))
+    (timbre/set-level! :debug))
+  (timbre/debug "dev mode"))
 
 (defn mount-root []
   (re-frame/clear-subscription-cache!)
@@ -17,10 +20,10 @@
                   (.getElementById js/document "app")))
 
 (defn ^:export init []
-  (enable-console-print!)
-  (println "Attemptin to initialize")
-  (js/console.log "Let's get things started.")
+  (timbre-setup)
+  (dev-setup)
+  (debug "Attemptin to initialize")
+  (debug "Let's get things started.")
   (re-frame/dispatch-sync [::events/initialize-db])
   (re-frame/dispatch [::events/initialize-firebase])
-  (dev-setup)
   (mount-root))

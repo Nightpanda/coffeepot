@@ -34,6 +34,7 @@
                                      :on-click (fn [] (re-frame/dispatch [::events/change-locale :en]))}]
                  :rightmost-buttons [{:label (localize :signup)
                                       :on-click (fn login-click [e]
+                                                  (re-frame/dispatch [::events/current-view :sign-up])
                                                   (debug "Sign up"))}
                                      {:label (localize-with-substitute :login (localize :google))
                                       :on-click (fn login-click [e]

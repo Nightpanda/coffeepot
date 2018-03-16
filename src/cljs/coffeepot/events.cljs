@@ -31,3 +31,8 @@
  ::initialize-firebase
  (fn [db [_]]
    (assoc db :firebase-app  (js/firebase.initializeApp firebase-config))))
+
+(re-frame/reg-event-db
+  ::current-view
+  (fn [db  [_ current-view]]
+    (assoc db :current-view current-view)))

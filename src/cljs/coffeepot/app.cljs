@@ -12,6 +12,7 @@
             [coffeepot.components.common :as c]
             [coffeepot.views.front.core :as front]
             [coffeepot.views.coffee.core :as coffee]
+            [coffeepot.views.signup.core :as signup]
             [coffeepot.localization :refer [localize-with-substitute]]
             [coffeepot.theme.theme :as theme]))
 
@@ -26,8 +27,8 @@
          (.auth @firebase-app)
          (fn auth-state-changed [user-obj]
            (if (nil? user-obj)
-             (re-frame/dispatch [::events/user-logged-in false])
-             (re-frame/dispatch [::events/user-logged-in true])))
+             (re-frame/dispatch [::events/current-view :logged-out])
+             (re-frame/dispatch [::events/current-view :logged-in])))
          (fn auth-error [error]
            (debug error))))
       (debug "Firebase app not present or listener already active!"))))
@@ -36,11 +37,14 @@
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])
         listener-alive? (re-frame/subscribe [::subs/auth-listener])
         name (re-frame/subscribe [::subs/name])
-        user (re-frame/subscribe [::subs/user])]
+        user (re-frame/subscribe [::subs/user])
+        current-view (re-frame/subscribe [::subs/current-view])]
     (fn []
       (if (false? @listener-alive?)
         (add-auth-listener))
+        (debug @current-view)
       (if (some? @firebase-app)
-        (if (:logged-in @user)
-          [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [coffee/app-main]]
-          [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [front/login-page]])))))
+        (case @current-view
+          :logged-in [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [coffee/app-main]]
+          :logged-out [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [front/login-page]]
+          :sign-up [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [signup/signup-modal]])))))

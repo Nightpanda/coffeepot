@@ -25,3 +25,8 @@
  ::locale
  (fn [db]
    (:locale db)))
+
+(re-frame/reg-sub
+  ::current-view
+  (fn [db]
+    (:current-view db)))

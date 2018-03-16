@@ -6,4 +6,5 @@
    :auth-listener false
    :user {:username "User Name"
           :logged-in false}
-   :locale :fi})
+   :locale :fi
+   :current-view :logged-out})

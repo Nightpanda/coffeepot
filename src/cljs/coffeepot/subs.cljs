@@ -35,3 +35,13 @@
   ::sub-view
   (fn [db]
     (:sub-view db)))
+
+(re-frame/reg-sub
+  ::username
+  (fn [db]
+    (:username db)))
+
+(re-frame/reg-sub
+ ::user-uid
+ (fn [db]
+   (:user-uid db)))

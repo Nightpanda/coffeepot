@@ -26,8 +26,13 @@
          (.auth @firebase-app)
          (fn auth-state-changed [user-obj]
            (if (nil? user-obj)
-             (re-frame/dispatch [::events/current-view :logged-out])
-             (re-frame/dispatch [::events/current-view :logged-in])))
+            (do 
+              (re-frame/dispatch [::events/set-user-uid nil])
+              (re-frame/dispatch [::events/current-view :logged-out]))
+            (do 
+              (re-frame/dispatch [::events/set-user-uid (.-uid user-obj)])
+              (re-frame/dispatch [::events/current-view :logged-in])
+              (events/get-username! (.-uid user-obj)))))
          (fn auth-error [error]
            (debug error))))
       (debug "Firebase app not present or listener already active!"))))

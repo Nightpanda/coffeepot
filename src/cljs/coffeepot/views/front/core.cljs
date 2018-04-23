@@ -42,6 +42,7 @@
                                                   (google-sign-in))}]]
                 [c/content
                  [signup/signup-modal]
+                 [signup/register-username]
                  [c/phone-preview-box
                   "1" "images/coffeepotphone.png"]
                  [c/title-box

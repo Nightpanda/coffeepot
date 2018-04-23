@@ -10,16 +10,18 @@
             [coffeepot.components.navheader :as nav]
             [coffeepot.events :as events]
             [coffeepot.subs :as subs]
+            [coffeepot.views.signup.core :as signup]
             [coffeepot.localization :refer [localize localize-with-substitute]]
             [coffeepot.components.styles :as styles]))
 
 (defn logout-auth []
   (debug "logging out")
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-      (.signOut (.auth @firebase-app))))
+      (.signOut (.auth @firebase-app))
+      (re-frame/dispatch [::events/username nil])))
 
 (defn app-main []
-  (let [user (re-frame/subscribe [::subs/user])]
+  (let [username (re-frame/subscribe [::subs/username])]
     (fn []
       [re-com/v-box
        :min-height "100vh"
@@ -37,7 +39,8 @@
                                         :on-click (fn login-click [e]
                                                     (logout-auth))}]]
                   [c/app-content
+                   [signup/register-username]
                    [c/no-brews]
                    [re-com/box
                     :class "just-a-test"
-                    :child [:p (str "Hei käyttäjä " (:username @user))]]]]])))
+                    :child [ui/card-text (str "Hei käyttäjä " @username)]]]]])))

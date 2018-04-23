@@ -7,4 +7,6 @@
    :user {:username "User Name"
           :logged-in false}
    :locale :fi
-   :current-view :logged-out})
+   :current-view :logged-out
+   :user-uid nil
+   :username nil})

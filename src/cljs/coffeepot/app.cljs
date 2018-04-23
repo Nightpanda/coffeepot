@@ -12,7 +12,6 @@
             [coffeepot.components.common :as c]
             [coffeepot.views.front.core :as front]
             [coffeepot.views.coffee.core :as coffee]
-            [coffeepot.views.signup.core :as signup]
             [coffeepot.localization :refer [localize-with-substitute]]
             [coffeepot.theme.theme :as theme]))
 
@@ -46,5 +45,4 @@
       (if (some? @firebase-app)
         (case @current-view
           :logged-in [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [coffee/app-main]]
-          :logged-out [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [front/login-page]]
-          :sign-up [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [signup/signup-modal]])))))
+          :logged-out [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [front/login-page]])))))

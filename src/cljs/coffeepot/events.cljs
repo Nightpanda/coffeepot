@@ -36,3 +36,8 @@
   ::current-view
   (fn [db  [_ current-view]]
     (assoc db :current-view current-view)))
+
+(re-frame/reg-event-db
+  ::sub-view
+  (fn [db  [_ sub-view]]
+    (assoc db :sub-view sub-view)))

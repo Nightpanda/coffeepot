@@ -30,3 +30,8 @@
   ::current-view
   (fn [db]
     (:current-view db)))
+
+(re-frame/reg-sub
+  ::sub-view
+  (fn [db]
+    (:sub-view db)))

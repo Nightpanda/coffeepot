@@ -26,16 +26,16 @@
     (let [user-uid (re-frame/subscribe [::subs/user-uid])
           new-username (r/atom "")]
         [ui/card
-            [ui/card-text 
+            [ui/card-text
               [:input.form-control
                 {:on-change #(reset! new-username (-> % .-target .-value))}]]
             [ui/card-text "Live checking for the username will be given!"]
             [ui/card-text "We will link your google-authentication with this username"]
-            [ui/card-actions 
-              [ui/flat-button {:on-click (fn [] 
+            [ui/card-actions
+              [ui/flat-button {:on-click (fn []
                 (events/save-username-uid @user-uid @new-username)
                 #((re-frame/dispatch [::events/sub-view ""]))) :label "Save username"}]
-              [ui/flat-button {:on-click (fn [] 
+              [ui/flat-button {:on-click (fn []
                                             #((re-frame/dispatch [::events/sub-view ""]))
                                             (logout-auth)) :label "Logout"}]]])))
 
@@ -47,9 +47,9 @@
             [ui/card-header [ui/flat-button {:on-click (fn [] (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
     (.signInWithPopup (.auth @firebase-app) (provider)))) :label "Signup with Google"} ]]
             [ui/card-text "After authentication, you can choose a username"]
-            
-            [ui/card-actions 
-              
+
+            [ui/card-actions
+
               [ui/flat-button {:on-click #((re-frame/dispatch [::events/sub-view ""])) :label "Cancel"}]]
    ])))
 
@@ -64,11 +64,10 @@
      [sign-up-form]]))
 
 (defn register-username []
-  (let [username (re-frame/subscribe [::subs/username])
-        user-uid (re-frame/subscribe [::subs/user-uid])]
+  (let [sub-view (re-frame/subscribe [::subs/sub-view])]
     [ui/dialog
      {:title "Welcome to Coffeepot. Please register a username"
-      :open (and (some? @user-uid) (nil? @username))
+      :open (= @sub-view :register)
       :modal false
       :onRequestClose #((re-frame/dispatch [::events/sub-view ""]))}
      [register-form]]))

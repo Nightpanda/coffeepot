@@ -25,22 +25,30 @@
     (fn []
       [re-com/v-box
        :min-height "100vh"
-       :children [[nav/navigation-header
-                   :site-logo "images/brandlogo_s_web.png"
-                   :site-title (localize :app-title)
-                   :navigation-tabs [{:label (localize :coffees) :icon "images/weblogod.png"}
-                                     {:label (localize :roasters) :icon "images/weblogod.png"}
-                                     {:label (localize :cafes) :icon "images/weblogod.png"}
-                                     {:label (localize :recipes) :icon "images/weblogod.png"}]
-                   :search-field {:placeholder (localize :search)
-                                  :search (fn []
-                                            ["Paulig" "Juhla Mokka" "Brazil" "Kulta Katriina"])}
-                   :rightmost-buttons [{:label (localize :logout)
-                                        :on-click (fn login-click [e]
-                                                    (logout-auth))}]]
-                  [c/app-content
-                   [signup/register-username]
-                   [c/no-brews]
-                   [re-com/box
-                    :class "just-a-test"
-                    :child [ui/card-text (str "Hei käyttäjä " @username)]]]]])))
+       :children [(let [username (re-frame/subscribe [::subs/username])
+                        sub-view (re-frame/subscribe [::subs/sub-view])]
+                    (if (nil? @username)
+                      (re-frame/dispatch [::events/sub-view :register]))
+                    (if (= @sub-view :register)
+                      [signup/register-username]
+                      (fn []
+                        [nav/navigation-header
+                         :site-logo "images/brandlogo_s_web.png"
+                         :site-title (localize :app-title)
+                         :navigation-tabs [{:label (localize :coffees) :icon "images/weblogod.png"}
+                                           {:label (localize :roasters) :icon "images/weblogod.png"}
+                                           {:label (localize :cafes) :icon "images/weblogod.png"}
+                                           {:label (localize :recipes) :icon "images/weblogod.png"}]
+                         :search-field {:placeholder (localize :search)
+                                        :search (fn []
+                                                  ["Paulig" "Juhla Mokka" "Brazil" "Kulta Katriina"])}
+                         :rightmost-buttons [{:label (localize :logout)
+                                              :on-click (fn login-click [e]
+                                                          (logout-auth))}]]))
+
+
+                    [c/app-content
+                     [c/no-brews]
+                     [re-com/box
+                      :class "just-a-test"
+                      :child [ui/card-text (str "Hei käyttäjä " @username)]]])]])))

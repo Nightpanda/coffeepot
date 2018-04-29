@@ -10,7 +10,7 @@
  ::firebase-app
  (fn [db]
    (:firebase-app db)))
-
+   
 (re-frame/reg-sub
  ::auth-listener
  (fn [db]
@@ -45,3 +45,8 @@
  ::user-uid
  (fn [db]
    (:user-uid db)))
+
+(re-frame/reg-sub
+  ::user-description
+  (fn [db]
+    (:user-description db)))

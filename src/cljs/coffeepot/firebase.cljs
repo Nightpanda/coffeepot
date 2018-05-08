@@ -13,6 +13,10 @@
 (defn initialize-firebase []
   (re-frame/dispatch [::events/firebase (js/firebase.initializeApp firebase-config)]))
 
+(def providers []
+  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
+    {:google (new (.auth.GoogleAuthProvider @firebase))}))
+
 (defn logout-auth []
   (debug "logging out")
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]

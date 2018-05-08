@@ -14,9 +14,6 @@
               [coffeepot.components.styles :as styles]
               [coffeepot.firebase :as firebase]))
 
-(defn provider []
-  (new js/firebase.auth.GoogleAuthProvider))
-
 (defn abort-sign-up! []
   (re-frame/dispatch [::events/sub-view ""])
   (firebase/logout-auth))
@@ -48,7 +45,7 @@
       [ui/card
        (if (nil? @user-uid)
          [ui/card-header [ui/flat-button {:on-click (fn [] (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-                                                             (.signInWithPopup (.auth @firebase-app) (provider)))) :label (localize-with-substitute :signup-with (localize :google))} ]]
+                                                             (.signInWithPopup (.auth @firebase-app) (:google firebase/providers)))) :label (localize-with-substitute :signup-with (localize :google))} ]]
          [ui/card-header (localize :authenticated)])])))
 
 (def register-username-step

@@ -15,6 +15,8 @@
             [coffeepot.theme.theme :as theme]
             [coffeepot.firebase :as firebase]))
 
+(firebase/add-auth-listener)
+
 (defn main-panel []
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])
         listener-alive? (re-frame/subscribe [::subs/auth-listener])

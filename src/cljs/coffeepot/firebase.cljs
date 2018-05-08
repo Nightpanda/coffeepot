@@ -11,7 +11,16 @@
         :databaseURL "https://coffeepot-d13ea.firebaseio.com"})
 
 (defn initialize-firebase []
-  (re-frame/dispatch [::events/firebase (js/firebase.initializeApp firebase-config)]) )
+  (re-frame/dispatch [::events/firebase (js/firebase.initializeApp firebase-config)]))
+
+(defn logout-auth []
+  (debug "logging out")
+  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
+    (.signOut (.auth @firebase-app))
+    (re-frame/dispatch [::events/sub-view ""])
+    (re-frame/dispatch [::events/user-uid nil])
+    (re-frame/dispatch [::events/username nil])
+    (re-frame/dispatch [::events/user-description nil])))
 
 (defn db-ref [path]
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])

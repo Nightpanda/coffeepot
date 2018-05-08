@@ -14,19 +14,12 @@
               [coffeepot.components.styles :as styles]
               [coffeepot.firebase :as firebase]))
 
-(defn logout-auth []
-  (debug "logging out")
-  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-    (re-frame/dispatch [::events/user-uid nil])
-    (re-frame/dispatch [::events/username nil])
-    (.signOut (.auth @firebase-app))))
-
 (defn provider []
   (new js/firebase.auth.GoogleAuthProvider))
 
 (defn abort-sign-up! []
   (re-frame/dispatch [::events/sub-view ""])
-  (logout-auth))
+  (firebase/logout-auth))
 
 (def register-form
   (fn []

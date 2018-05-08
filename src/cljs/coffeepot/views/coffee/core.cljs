@@ -11,17 +11,9 @@
             [coffeepot.events :as events]
             [coffeepot.subs :as subs]
             [coffeepot.views.signup.core :as signup]
+            [coffeepot.firebase :as firebase]
             [coffeepot.localization :refer [localize localize-with-substitute]]
             [coffeepot.components.styles :as styles]))
-
-(defn logout-auth []
-  (debug "logging out")
-  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-    (.signOut (.auth @firebase-app))
-    (re-frame/dispatch [::events/sub-view ""])
-    (re-frame/dispatch [::events/user-uid nil])
-    (re-frame/dispatch [::events/username nil])
-    (re-frame/dispatch [::events/user-description nil])))
 
 (defn app-main []
   (let [username (re-frame/subscribe [::subs/username])
@@ -41,8 +33,8 @@
                                   :search (fn []
                                             ["Paulig" "Juhla Mokka" "Brazil" "Kulta Katriina"])}
                     :rightmost-buttons [{:label (localize :logout)
-                                        :on-click (fn login-click [e]
-                                                    (logout-auth))}]]
+                                        :on-click (fn logout-click [e]
+                                                    (firebase/logout-auth))}]]
                   [c/app-content
                    [signup/user-description-modal]
                    [c/no-brews]

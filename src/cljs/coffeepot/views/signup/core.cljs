@@ -45,7 +45,7 @@
       [ui/card
        (if (nil? @user-uid)
          [ui/card-header [ui/flat-button {:on-click (fn [] (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-                                                             (.signInWithPopup (.auth @firebase-app) (:google firebase/providers)))) :label (localize-with-substitute :signup-with (localize :google))} ]]
+                                                             (firebase/signInWithProvider :google))) :label (localize-with-substitute :signup-with (localize :google))} ]]
          [ui/card-header (localize :authenticated)])])))
 
 (def register-username-step

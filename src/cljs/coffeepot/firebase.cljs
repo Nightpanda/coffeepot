@@ -17,6 +17,9 @@
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
     {:google (new (.auth.GoogleAuthProvider @firebase))}))
 
+(defn signInWithProvider [provider]
+  (.signInWithPopup (.auth @firebase-app) (provider firebase/providers)))
+
 (defn logout-auth []
   (debug "logging out")
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]

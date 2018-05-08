@@ -4,7 +4,8 @@
             [taoensso.timbre :as timbre :refer-macros [debug info warn error]]
             [coffeepot.app :as app]
             [coffeepot.config :as config]
-            [coffeepot.events :as events]))
+            [coffeepot.events :as events]
+            [coffeepot.firebase :as firebase]))
 
 (defn timbre-setup []
   (timbre/set-level! :info))
@@ -25,5 +26,5 @@
   (debug "Attemptin to initialize")
   (debug "Let's get things started.")
   (re-frame/dispatch-sync [::events/initialize-db])
-  (re-frame/dispatch [::events/initialize-firebase])
+  (firebase/initialize-firebase)
   (mount-root))

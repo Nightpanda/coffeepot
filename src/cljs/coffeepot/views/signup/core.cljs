@@ -35,18 +35,18 @@
        [ui/card-text
         [:input.form-control
          {:on-change #(reset! new-username (-> % .-target .-value))}]]
-       [ui/card-text "We will link your google-authentication with this username"]
+       [ui/card-text (localize :link-auth-username)]
        [ui/card-actions
         [events/listen-firebase-db (str "usernames/")
          (fn [usernames]
            (if (some? @usernames)
              (if (empty? (filter #(= % @new-username) (js/Object.keys @usernames)))
                (do
-                 [ui/card-text "No username found, you all good."]
+                 [ui/card-text (localize :no-username-found)]
                  [ui/flat-button {:on-click (fn []
                                               (events/save-username-uid @user-uid @new-username)
-                                              (re-frame/dispatch [::events/sub-view ""])) :label "Save username"}])
-               [ui/card-text "Warning! That username is taken"])))]]])))
+                                              (re-frame/dispatch [::events/sub-view ""])) :label (localize :save-username)}])
+               [ui/card-text (localize :username-warning)])))]]])))
 
 (def authenticate-step
   (fn []
@@ -54,8 +54,8 @@
       [ui/card
        (if (nil? @user-uid)
          [ui/card-header [ui/flat-button {:on-click (fn [] (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-                                                             (.signInWithPopup (.auth @firebase-app) (provider)))) :label "Signup with Google"} ]]
-         [ui/card-header "You are now authenticated."])])))
+                                                             (.signInWithPopup (.auth @firebase-app) (provider)))) :label (localize-with-substitute :signup-with (localize :google))} ]]
+         [ui/card-header (localize :authenticated)])])))
 
 (def register-username-step
   (fn []
@@ -80,17 +80,16 @@
           user-description (re-frame/subscribe [::subs/user-description])
           new-user-description (r/atom "")]
       [ui/card
-       [ui/card-header "Would you like to write a short description?"]
+       [ui/card-header (localize :add-description)]
        [ui/card-text
         [:input.form-control
          {:on-change #(reset! new-user-description (-> % .-target .-value))}]]
        [ui/flat-button {:on-click (fn []
-                                    (events/save-user-description @user-uid @new-user-description)) :label "Save description"}]
-       [ui/card-text "This won't be public until you make it so."]
+                                    (events/save-user-description @user-uid @new-user-description)) :label (localize :save-description)}]
        (if (nil? @user-description)
          [ui/flat-button {:on-click
                           (fn [] (re-frame/dispatch [::events/user-description ""])
-                            (events/save-user-description @user-uid "")) :label "I'll do it later."}])])))
+                            (events/save-user-description @user-uid "")) :label (localize :maybe-later)}])])))
 
 (def sign-up-form
   (let [user-uid (re-frame/subscribe [::subs/user-uid])
@@ -107,21 +106,21 @@
           (= @step 1) [register-username-step])]
        [ui/stepper {:activeStep @step}
         [ui/step
-         [ui/step-label "Authenticate"]]
+         [ui/step-label (localize :authenticate)]]
         [ui/step
-         [ui/step-label "Register username"]]]
+         [ui/step-label (localize :register-username)]]]
        [ui/card-actions
         (if (> @step 0)
-          [ui/flat-button {:on-click #(swap! step step<-)} "Back"]
-          [ui/flat-button {:on-click #(abort-sign-up!) :label "Cancel"}])
+          [ui/flat-button {:on-click #(swap! step step<-)} (localize :back)]
+          [ui/flat-button {:on-click #(abort-sign-up!) :label (localize :cancel)}])
         (cond
           (= @step 0) (if (some? @user-uid)
-                        [ui/raised-button {:on-click #(swap! step step->)} "Next"]))]])))
+                        [ui/raised-button {:on-click #(swap! step step->)} (localize :next)]))]])))
 
 (defn signup-modal []
   (let [sub-view (re-frame/subscribe [::subs/sub-view])]
     [ui/dialog
-     {:title "Welcome to Coffeepot."
+     {:title (localize :welcome-coffeepot)
       :open (= @sub-view :sign-up)
       :modal false
       :onRequestClose #(re-frame/dispatch [::events/sub-view ""])}
@@ -132,7 +131,7 @@
         username (re-frame/subscribe [::subs/username])
         description (re-frame/subscribe [::subs/user-description])]
     [ui/dialog
-     {:title (str "Hello " @username)
+     {:title (localize-with-substitute :hello @username)
       :open (and (some? @user-uid) (some? @username) (nil? @description))
       :modal false
       :onRequestClose (fn [] (re-frame/dispatch [::events/description ""]))}

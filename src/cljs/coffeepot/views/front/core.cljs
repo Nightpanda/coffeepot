@@ -11,6 +11,7 @@
             [coffeepot.events :as events]
             [coffeepot.subs :as subs]
             [coffeepot.views.signup.core :as signup]
+            [coffeepot.views.signin.core :as signin]
             [coffeepot.localization :refer [localize localize-with-substitute]]
             [coffeepot.components.styles :as styles]))
 
@@ -38,10 +39,12 @@
                                                   (re-frame/dispatch [::events/sub-view :sign-up])
                                                   (debug "Sign up"))}
                                      {:label (localize-with-substitute :login (localize :google))
+                                      :id "sign-in"
                                       :on-click (fn login-click [e]
-                                                  (google-sign-in))}]]
+                                      (re-frame/dispatch [::events/sub-view :sign-in]))}]]
                 [c/content
                  [signup/signup-modal]
+                 [signin/signin-modal]
                  [c/phone-preview-box
                   "1" "images/coffeepotphone.png"]
                  [c/title-box

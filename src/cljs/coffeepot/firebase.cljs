@@ -1,16 +1,18 @@
 (ns coffeepot.firebase
   (:require [re-frame.core :as re-frame]
             [coffeepot.subs :as subs]
+            [coffeepot.envconfig :as env]
             [reagent.core :as r]
             [taoensso.timbre :as timbre :refer-macros [debug info warn error]]
             [coffeepot.events :as events]))
 
 (def firebase-config
-   #js {:apiKey "AIzaSyABjP8bTTvEfy1n_pgR8oiqFBCn6hr4CP8"
-        :authDomain "coffeepot-d13ea.firebaseapp.com"
-        :databaseURL "https://coffeepot-d13ea.firebaseio.com"})
+   #js {:apiKey (:apiKey env/firebase)
+        :authDomain (:authDomain env/firebase)
+        :databaseURL (:databaseURL env/firebase)})
 
 (defn initialize-firebase []
+  (.log js/console firebase-config)
   (re-frame/dispatch [::events/firebase (js/firebase.initializeApp firebase-config)]))
 
 (def providers

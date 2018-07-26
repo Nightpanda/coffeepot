@@ -15,3 +15,6 @@ pom.xml.asc
 /resources/public/js/compiled/
 /public/js/compiled/
 *.vscode/
+/config/dev.cljs
+/config/prod.cljs
+/src/cljs/coffeepot/envconfig.cljs

@@ -14,3 +14,4 @@ pom.xml.asc
 *.log
 /resources/public/js/compiled/
 /public/js/compiled/
+*.vscode/

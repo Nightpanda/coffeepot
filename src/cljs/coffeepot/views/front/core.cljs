@@ -10,6 +10,7 @@
             [coffeepot.components.navheader :as nav]
             [coffeepot.events :as events]
             [coffeepot.subs :as subs]
+            [coffeepot.views.signup.core :as signup]
             [coffeepot.localization :refer [localize localize-with-substitute]]
             [coffeepot.components.styles :as styles]))
 
@@ -34,11 +35,13 @@
                                      :on-click (fn [] (re-frame/dispatch [::events/change-locale :en]))}]
                  :rightmost-buttons [{:label (localize :signup)
                                       :on-click (fn login-click [e]
+                                                  (re-frame/dispatch [::events/sub-view :sign-up])
                                                   (debug "Sign up"))}
                                      {:label (localize-with-substitute :login (localize :google))
                                       :on-click (fn login-click [e]
                                                   (google-sign-in))}]]
                 [c/content
+                 [signup/signup-modal]
                  [c/phone-preview-box
                   "1" "images/coffeepotphone.png"]
                  [c/title-box

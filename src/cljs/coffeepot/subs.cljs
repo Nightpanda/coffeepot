@@ -10,7 +10,7 @@
  ::firebase-app
  (fn [db]
    (:firebase-app db)))
-
+   
 (re-frame/reg-sub
  ::auth-listener
  (fn [db]
@@ -25,3 +25,28 @@
  ::locale
  (fn [db]
    (:locale db)))
+
+(re-frame/reg-sub
+  ::current-view
+  (fn [db]
+    (:current-view db)))
+
+(re-frame/reg-sub
+  ::sub-view
+  (fn [db]
+    (:sub-view db)))
+
+(re-frame/reg-sub
+  ::username
+  (fn [db]
+    (:username db)))
+
+(re-frame/reg-sub
+ ::user-uid
+ (fn [db]
+   (:user-uid db)))
+
+(re-frame/reg-sub
+  ::user-description
+  (fn [db]
+    (:user-description db)))

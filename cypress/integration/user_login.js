@@ -1,6 +1,8 @@
-describe('nakkivene', () => {
-  it('venenakki', () => {
-    cy.visit('http://localhost:3449')
+import config from '../fixtures/config.js'
+
+describe('User', () => {
+  it('logins with email', () => {
+    cy.visit(config.devHostAddress)
 //Setup the test data
 //Firebase login is required at CLI
     cy.exec('firebase database:set /users cypress/fixtures/coffeepot.json --confirm')

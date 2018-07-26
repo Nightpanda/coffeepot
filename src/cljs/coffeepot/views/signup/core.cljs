@@ -11,21 +11,12 @@
               [coffeepot.events :as events]
               [coffeepot.subs :as subs]
               [coffeepot.localization :refer [localize localize-with-substitute]]
-              [coffeepot.components.styles :as styles]))
-
-(defn logout-auth []
-  (debug "logging out")
-  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-    (re-frame/dispatch [::events/user-uid nil])
-    (re-frame/dispatch [::events/username nil])
-    (.signOut (.auth @firebase-app))))
-
-(defn provider []
-  (new js/firebase.auth.GoogleAuthProvider))
+              [coffeepot.components.styles :as styles]
+              [coffeepot.firebase :as firebase]))
 
 (defn abort-sign-up! []
   (re-frame/dispatch [::events/sub-view ""])
-  (logout-auth))
+  (firebase/logout-auth))
 
 (def register-form
   (fn []
@@ -37,14 +28,14 @@
          {:on-change #(reset! new-username (-> % .-target .-value))}]]
        [ui/card-text (localize :link-auth-username)]
        [ui/card-actions
-        [events/listen-firebase-db (str "usernames/")
+        [firebase/listen-firebase-db (str "usernames/")
          (fn [usernames]
            (if (some? @usernames)
              (if (empty? (filter #(= % @new-username) (js/Object.keys @usernames)))
                (do
                  [ui/card-text (localize :no-username-found)]
                  [ui/flat-button {:on-click (fn []
-                                              (events/save-username-uid @user-uid @new-username)
+                                              (firebase/save-username-uid! @user-uid @new-username)
                                               (re-frame/dispatch [::events/sub-view ""])) :label (localize :save-username)}])
                [ui/card-text (localize :username-warning)])))]]])))
 
@@ -54,7 +45,7 @@
       [ui/card
        (if (nil? @user-uid)
          [ui/card-header [ui/flat-button {:on-click (fn [] (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-                                                             (.signInWithPopup (.auth @firebase-app) (provider)))) :label (localize-with-substitute :signup-with (localize :google))} ]]
+                                                             (firebase/signInWithProvider :google))) :label (localize-with-substitute :signup-with (localize :google))} ]]
          [ui/card-header (localize :authenticated)])])))
 
 (def register-username-step
@@ -85,11 +76,11 @@
         [:input.form-control
          {:on-change #(reset! new-user-description (-> % .-target .-value))}]]
        [ui/flat-button {:on-click (fn []
-                                    (events/save-user-description @user-uid @new-user-description)) :label (localize :save-description)}]
+                                    (firebase/save-user-description! @user-uid @new-user-description)) :label (localize :save-description)}]
        (if (nil? @user-description)
          [ui/flat-button {:on-click
                           (fn [] (re-frame/dispatch [::events/user-description ""])
-                            (events/save-user-description @user-uid "")) :label (localize :maybe-later)}])])))
+                            (firebase/save-user-description! @user-uid "")) :label (localize :maybe-later)}])])))
 
 (def sign-up-form
   (let [user-uid (re-frame/subscribe [::subs/user-uid])

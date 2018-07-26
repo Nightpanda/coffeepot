@@ -12,31 +12,10 @@
             [coffeepot.components.common :as c]
             [coffeepot.views.front.core :as front]
             [coffeepot.views.coffee.core :as coffee]
-            [coffeepot.localization :refer [localize-with-substitute]]
-            [coffeepot.theme.theme :as theme]))
+            [coffeepot.theme.theme :as theme]
+            [coffeepot.firebase :as firebase]))
 
-(defn add-auth-listener []
-  (debug "Adding auth listener!")
-  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])
-        listener-alive? (re-frame/subscribe [::subs/auth-listener])]
-    (if (and (not @listener-alive?) (some? @firebase-app))
-      (do
-        (re-frame/dispatch [::events/change-auth-listener-status true])
-        (.onAuthStateChanged
-         (.auth @firebase-app)
-         (fn auth-state-changed [user-obj]
-           (if (nil? user-obj)
-            (do
-              (re-frame/dispatch [::events/user-uid nil])
-              (re-frame/dispatch [::events/current-view :logged-out]))
-            (do
-              (re-frame/dispatch [::events/user-uid (.-uid user-obj)])
-              (re-frame/dispatch [::events/current-view :logged-in])
-              (events/get-username! (.-uid user-obj))
-              (events/get-user-description! (.-uid user-obj)))))
-         (fn auth-error [error]
-           (debug error))))
-      (debug "Firebase app not present or listener already active!"))))
+(firebase/add-auth-listener)
 
 (defn main-panel []
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])
@@ -45,7 +24,7 @@
         username (re-frame/subscribe [::subs/username])]
     (fn []
       (if (false? @listener-alive?)
-        (add-auth-listener))
+        (firebase/add-auth-listener))
       (if (some? @firebase-app)
         (cond
           (and (some? @user-uid) (some? @username)) [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [coffee/app-main]]

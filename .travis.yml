@@ -1,3 +1,7 @@
 language: clojure
 lein: lein
-script: "lein cljsbuild once min"
+script: 
+- touch src/cljs/coffeepot/envconfig.cljs
+- echo "(ns coffeepot.envconfig) (def firebase {})" > src/cljs/coffeepot/envconfig.cljs	
+- lein cljsbuild once min
+- rm src/cljs/coffeepot/envconfig.cljs

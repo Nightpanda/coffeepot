@@ -34,6 +34,8 @@
                       :next "Seuraava"
                       :hello "Tervehdys {1}"
                       :welcome-coffeepot "Tervetuloa käyttämään Coffeepottia"
+                      :add-experience "Lisää uusi kahvikirjaus"
+                      :add "Lisää"
                       }
                  :en {
                       :app-title "Coffeepot"
@@ -65,6 +67,8 @@
                       :next "Next"
                       :hello "Hello {1}"
                       :welcome-coffeepot "Welcome to Coffeepot."
+                      :add-experience "Add a new coffee experience"
+                      :add "Add"
                       }
                  :tongue/fallback :fi
                  })

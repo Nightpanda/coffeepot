@@ -12,7 +12,6 @@
         :databaseURL (:databaseURL env/firebase)})
 
 (defn initialize-firebase []
-  (.log js/console firebase-config)
   (re-frame/dispatch [::events/firebase (js/firebase.initializeApp firebase-config)]))
 
 (def providers

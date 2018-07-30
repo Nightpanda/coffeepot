@@ -57,6 +57,11 @@
                :style {:font-size "8em"}
                :child text]]])
 
+(defn floating-add-button [action]
+  [ui/floating-action-button
+   {:onClick action}
+   (ic/content-add)])
+
 (defn footer [text]
   [re-com/box
    :style (:footer styles/styles)

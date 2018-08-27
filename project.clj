@@ -13,7 +13,14 @@
                  [com.taoensso/timbre "4.10.0"]
                  [tongue "0.2.3"]]
 
-  :plugins [[lein-cljsbuild "1.1.5"]]
+  :plugins [[lein-cljsbuild "1.1.5"]
+	    [lein-npm "0.6.2"]]
+
+  :npm {:devDependencies [[cypress "2.1.0"]
+                          [firebase-tools "3.18.5"]]
+	:package 
+          {:scripts
+            {:cypress ".\\node_modules\\.bin\\cypress open"}}}
 
   :min-lein-version "2.5.3"
 

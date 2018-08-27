@@ -153,4 +153,5 @@
                                                             :style {:padding "0em 0em 0em 1em"}
                                                             :child [ui/raised-button {:label (:label button)
                                                                                       :primary true
+                                                                                      :id (:id button)
                                                                                       :on-click (:on-click button)}]]))]]]]]]))

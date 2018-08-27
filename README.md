@@ -40,10 +40,20 @@ We use Trello to organize our development.
 	```
 	$ git checkout -b awesome-dev-branch
 	```
+#### Development
 
-#### Install dependencies
+Install dependencies
+$ lein install
+$ lein npm install
+Start local development server
+$ lein figwheel
 
-TBD
+#### Cypress testing
+$ lein npm install
+$ lein npm run cypress
+
+#### Local hosting to test production like environment
+$ firebase serve
 
 #### Set up Firebase account
 
@@ -90,6 +100,8 @@ TBD
 Start the app locally for development with the startup script start-dev.sh
 
 ### Deployment
+Builds cljs and deploys with firebase, asks for firebase login first if you are not logged in.
+$ build_deploy.sh
 #### Firebase
  
 To deploy the app with Firebase hosting, firebase tools must be installed with npm:

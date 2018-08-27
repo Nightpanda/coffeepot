@@ -31,16 +31,16 @@ We use Trello to organize our development.
 
 ### How to start
 
-## Development
+#### Development
 
 $ lein npm install
 $ lein figwheel
 
-## Cypress testing
+#### Cypress testing
 $ lein npm install
 $ lein npm run cypress
 
-## Local hosting to test production like environment
+#### Local hosting to test production like environment
 $ firebase serve
 
 #### Install dependencies

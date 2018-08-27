@@ -58,5 +58,4 @@
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false
-                    :externs ["externs/firebase.js"]}}
-    ]})
+                    :externs ["externs/firebase.js"]}}]})

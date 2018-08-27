@@ -30,10 +30,22 @@ We use Trello to organize our development.
  - Firebase (hosting and database)
 
 ### How to start
-
+#### Get the codes
+- Make sure you have git installed
+- Clone the Coffeepot repo to your computer:
+	```
+	$ git clone xxxxxxxxxxxxx
+	```
+- We love coffee, but we also love branches so just for the sake of branching:
+	```
+	$ git checkout -b awesome-dev-branch
+	```
 #### Development
 
+Install dependencies
+$ lein install
 $ lein npm install
+Start local development server
 $ lein figwheel
 
 #### Cypress testing
@@ -43,9 +55,42 @@ $ lein npm run cypress
 #### Local hosting to test production like environment
 $ firebase serve
 
-#### Install dependencies
+#### Set up Firebase account
 
-TBD
+ 1. Login and open the developer console at [Google Firebase](https://firebase.google.com/)
+ 2. Add a project
+    - Give your project a name and click 'Continue' and the click 'Create project'
+    - When your project has been created click 'Continue' and the project overview opens up
+ 3. Select 'Authentication' from the menu on the left
+ 4. Click 'Set up sign-in method'
+ 5. Select sign-in methods
+    - Enable Email/Password
+    - Enable Google
+ 6. Select 'Database' from the menu on the left
+ 7. Scroll down to 'Realtime Database' and click 'Create database'
+ 8. Select 'Start in test mode' and click 'Enable'
+ 9. Select 'Hosting' from the menu on the left
+10. Install Firebase tools
+	```
+	$ npm install -g firebase-tools
+	```
+11. After installing Firebase command line tools, click 'Continue'
+12. Finish setting up hosting
+    - Sign in to Google
+	    ```
+		$ firebase login
+		```
+    - Initiate your project
+	    ```
+		$ firebase init
+		```
+13. Get your project details
+    - Select 'Authentication' from the menu on the left
+    - Click 'Web setup'
+    - At least make a mental note of
+      - apiKey
+      - authDomain
+      - databaseURL
 
 #### Set up environmental config for Firebase account
 

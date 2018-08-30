@@ -3,6 +3,7 @@
             [re-com.core :as re-com]
             [reagent.core :as r]
             [cljsjs.material-ui]
+            [cljs-react-material-ui.core :refer [mui-theme-provider]]
             [cljs-react-material-ui.reagent :as ui]
             [cljs-react-material-ui.icons :as ic]
             [taoensso.timbre :as timbre :refer-macros [debug info warn error]]
@@ -13,7 +14,12 @@
             [coffeepot.views.signup.core :as signup]
             [coffeepot.views.signin.core :as signin]
             [coffeepot.localization :refer [localize localize-with-substitute]]
-            [coffeepot.components.styles :as styles]))
+            [coffeepot.components.styles :as styles]
+            [coffeepot.views.coffee.core :as coffee]
+            [coffeepot.theme.theme :as theme]
+            [coffeepot.firebase :as firebase]))
+
+(firebase/add-auth-listener)
 
 (defn provider []
   (new js/firebase.auth.GoogleAuthProvider))
@@ -52,3 +58,12 @@
                 [ui/bottom-navigation {:style {:height "3em"
                                                :padding "1em"}}
                  [:p (localize :footer-text)]]]]))
+
+(defn front-page []
+  (let [user-uid (re-frame/subscribe [::subs/user-uid])
+        username (re-frame/subscribe [::subs/username])]
+    (debug "useruid" @user-uid "username" @username)
+    (fn []
+      (cond
+        (and (some? @user-uid) (some? @username)) (re-frame/dispatch [::events/set-page :coffeepot])
+        :else [ui/mui-theme-provider {:mui-theme theme/coffeepot-theme} [login-page]]))))

@@ -3,6 +3,7 @@
                  [org.clojure/clojurescript "1.9.908"]
                  [reagent "0.7.0" :exclusions [cljsjs/react cljsjs/react-dom]]
                  [re-frame "0.10.2" :exclusions [cljsjs/react cljsjs/react-dom]]
+                 [secretary "1.2.3"]
                  [cljs-react-material-ui "0.2.48"]
                  [cljsjs/react "15.6.1-1"]
                  [cljsjs/react-dom "15.6.1-1"]

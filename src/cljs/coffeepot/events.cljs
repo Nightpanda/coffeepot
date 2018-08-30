@@ -5,6 +5,11 @@
             [coffeepot.subs :as subs]))
 
 (re-frame/reg-event-db
+ ::set-page
+ (fn [db [_ active-page]]
+   (assoc db :active-page active-page)))
+
+(re-frame/reg-event-db
  ::initialize-db
  (fn  [_ _]
    db/default-db))

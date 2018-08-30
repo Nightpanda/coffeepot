@@ -29,7 +29,8 @@
     (re-frame/dispatch [::events/sub-view ""])
     (re-frame/dispatch [::events/user-uid nil])
     (re-frame/dispatch [::events/username nil])
-    (re-frame/dispatch [::events/user-description nil])))
+    (re-frame/dispatch [::events/user-description nil])
+    (re-frame/dispatch [::events/set-page :front])))
 
 (defn db-ref [path]
   (let [firebase-app (re-frame/subscribe [::subs/firebase-app])
@@ -63,8 +64,6 @@
 (defn save-user-description! [uid description]
   (.set (db-ref (str "users/" uid "/description")) description)
   (re-frame/dispatch [::events/user-description description]))
-
-
 
 (defn listen-firebase-db [path f]
   (let [ref (db-ref path)

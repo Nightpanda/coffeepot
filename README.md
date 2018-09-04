@@ -105,6 +105,10 @@ If no project is currently active or the active project is not the correct one, 
  > $ ./start-coffeepot.sh
 
 ### Deployment
+#### Firebase tools
+To deploy the app with Firebase hosting, firebase tools must be installed with npm:
+ > $ npm install -g firebase-tools
+
 #### Emulate hosting
 To emulate hosting and functions locally
  > $ firebase serve
@@ -113,13 +117,9 @@ To emulate hosting and functions locally
 To build the app and deploy it to your Firebase account's hosting site (asks for firebase login first if you are not logged in)
  > $ build_deploy.sh
 
-#### Firebase
-
-To deploy the app with Firebase hosting, firebase tools must be installed with npm:
-   > $ npm install -g firebase-tools
-
-To build and deploy the app, run the build_deploy.sh script. The script builds cljs app and deploys it with firebase. If you haven't logged in to Firebase, you are first prompted to login.
-  > $ build_deploy.sh
+#### Deploy Firebase DB rules
+To deploy the database rules set in database_rules.json to Firebase
+ > $ firebase deploy --only database
 
 ### Testing
 #### Cypress testing

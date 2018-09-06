@@ -83,6 +83,17 @@ $ lein npm install
       - authDomain
       - databaseURL
 
+#### Make sure the project is active for Firebase CLI      
+
+List available Firebase projects
+ > $ firebase list
+
+Show active project
+ > $ firebase use
+
+If no project is currently active or the active project is not the correct one, activate another project
+ > $ firebase use my-project-id
+
 #### Set up environmental config for Firebase account
 
 [Environmental configs for Firebase](config/README.md#firebase)

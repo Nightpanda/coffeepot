@@ -124,3 +124,10 @@ To build and deploy the app, run the build_deploy.sh script. The script builds c
 ### Testing
 #### Cypress testing
   >$ lein npm run cypress
+  
+### Code analysis
+#### Kibit
+[Kibit](https://github.com/jonase/kibit) searches code patterns that could be rewritten.
+
+To run kibit code analyzer:
+  > $ lein kibit

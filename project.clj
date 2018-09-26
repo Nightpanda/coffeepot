@@ -3,6 +3,7 @@
                  [org.clojure/clojurescript "1.9.908"]
                  [reagent "0.7.0" :exclusions [cljsjs/react cljsjs/react-dom]]
                  [re-frame "0.10.2" :exclusions [cljsjs/react cljsjs/react-dom]]
+                 [secretary "1.2.3"]
                  [cljs-react-material-ui "0.2.48"]
                  [cljsjs/react "15.6.1-1"]
                  [cljsjs/react-dom "15.6.1-1"]
@@ -18,7 +19,7 @@
 
   :npm {:devDependencies [[cypress "2.1.0"]
                           [firebase-tools "3.18.5"]]
-	:package 
+	:package
           {:scripts
             {:cypress ".\\node_modules\\.bin\\cypress open"}}}
 
@@ -34,7 +35,8 @@
   {:dev
    {:dependencies [[binaryage/devtools "0.9.4"]]
 
-    :plugins      [[lein-figwheel "0.5.13"]]}}
+    :plugins      [[lein-figwheel "0.5.13"]
+                   [lein-kibit "0.1.6"]]}}
 
   :cljsbuild
   {:builds

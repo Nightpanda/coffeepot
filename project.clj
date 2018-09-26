@@ -19,7 +19,7 @@
 
   :npm {:devDependencies [[cypress "2.1.0"]
                           [firebase-tools "3.18.5"]]
-	:package 
+	:package
           {:scripts
             {:cypress ".\\node_modules\\.bin\\cypress open"}}}
 
@@ -35,7 +35,8 @@
   {:dev
    {:dependencies [[binaryage/devtools "0.9.4"]]
 
-    :plugins      [[lein-figwheel "0.5.13"]]}}
+    :plugins      [[lein-figwheel "0.5.13"]
+                   [lein-kibit "0.1.6"]]}}
 
   :cljsbuild
   {:builds

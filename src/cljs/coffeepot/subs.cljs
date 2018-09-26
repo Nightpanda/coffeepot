@@ -3,55 +3,44 @@
 
 (re-frame/reg-sub
  ::active-page
- (fn [db]
-   (:active-page db)))
+ :active-page)
 
 (re-frame/reg-sub
  ::name
- (fn [db]
-   (:name db)))
+ :name)
 
 (re-frame/reg-sub
  ::firebase-app
- (fn [db]
-   (:firebase-app db)))
+ :firebase-app)
 
 (re-frame/reg-sub
  ::auth-listener
- (fn [db]
-   (:auth-listener db)))
+ :auth-listener)
 
 (re-frame/reg-sub
  ::user
- (fn [db]
-   (:user db)))
+ :user)
 
 (re-frame/reg-sub
  ::locale
- (fn [db]
-   (:locale db)))
+ :locale)
 
 (re-frame/reg-sub
-  ::current-view
-  (fn [db]
-    (:current-view db)))
+ ::current-view
+ :current-view)
 
 (re-frame/reg-sub
-  ::sub-view
-  (fn [db]
-    (:sub-view db)))
+ ::sub-view
+ :sub-view)
 
 (re-frame/reg-sub
-  ::username
-  (fn [db]
-    (:username db)))
+ ::username
+ :username)
 
 (re-frame/reg-sub
  ::user-uid
- (fn [db]
-   (:user-uid db)))
+ :user-uid)
 
 (re-frame/reg-sub
-  ::user-description
-  (fn [db]
-    (:user-description db)))
+ ::user-description
+ :user-description)

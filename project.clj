@@ -21,7 +21,8 @@
                           [firebase-tools "3.18.5"]]
 	:package
           {:scripts
-            {:cypress ".\\node_modules\\.bin\\cypress open"}}}
+           {:cypress ".\\node_modules\\.bin\\cypress open"
+            :ui-test ".\\node_modules\\.bin\\cypress run"}}}
 
   :min-lein-version "2.5.3"
 

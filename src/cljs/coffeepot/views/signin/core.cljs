@@ -33,6 +33,7 @@
                :align :center
                :children [
                           [re-com/button
+                           :attr {:id "google-sign-in"}
                            :on-click (fn [e]
                                        (google-sign-in))
                            :label [re-com/h-box
@@ -64,6 +65,7 @@
                                            :align :center
                                            :gap "0.2em"
                                            :children [[re-com/input-text
+                                                       :attr {:id "email-address-input"}
                                                        :model ""
                                                        :change-on-blur? false
                                                        :on-change (fn [new-value]
@@ -73,6 +75,7 @@
                                            :align :center
                                            :gap "0.2em"
                                            :children [[re-com/input-text
+                                                       :attr {:id "email-password-input"}
                                                        :model ""
                                                        :input-type :password
                                                        :change-on-blur? false
@@ -82,6 +85,7 @@
                               [re-com/box
                                :align :center
                                :child [re-com/button
+                                       :attr {:id "email-sign-in"}
                                        :on-click email-sign-in
                                        :style {:color "white"
                                                :background-color "green"}

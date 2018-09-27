@@ -41,6 +41,7 @@
                      [signup/user-description-modal]
                      [c/no-brews]
                      [re-com/box
+                      :attr {:id "description-box"}
                       :class "just-a-test"
                       :child [ui/card-text (str "Hei käyttäjä " @username " Kuvauksesi oli " @description)]]]]]
         :else (re-frame/dispatch [::events/set-page :front])))))

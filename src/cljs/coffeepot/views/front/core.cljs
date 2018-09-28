@@ -42,12 +42,11 @@
                                      :on-click (fn [] (re-frame/dispatch [::events/change-locale :en]))}]
                  :rightmost-buttons [{:label (localize :signup)
                                       :on-click (fn login-click [e]
-                                                  (re-frame/dispatch [::events/sub-view :sign-up])
-                                                  (debug "Sign up"))}
+                                                  (re-frame/dispatch [::events/sub-view :sign-up]))}
                                      {:label (localize-with-substitute :login (localize :google))
                                       :id "sign-in"
                                       :on-click (fn login-click [e]
-                                      (re-frame/dispatch [::events/sub-view :sign-in]))}]]
+                                                  (re-frame/dispatch [::events/sub-view :sign-in]))}]]
                 [c/content
                  [signup/signup-modal]
                  [signin/signin-modal]

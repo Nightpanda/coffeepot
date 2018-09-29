@@ -123,7 +123,18 @@ To deploy the database rules set in database_rules.json to Firebase
 
 ### Testing
 #### Cypress testing
-  >$ lein npm run cypress
+All test related code can be found in the folder cypress
+##### Initial folder structure
+- fixtures: Contains data to be used in tests
+- integration: Tests related to integration with other systems, like firebase authentication
+- plugins: to load plugins if needed
+- support: supporting functionality for tests
+
+##### Running tests
+To start the UI for running cypress tests, run the cypress script defined in project.clj
+> $ lein npm run cypress
+
+When prompted for a project, choose the root folder for the coffeepot repository. It will automatically look for the cypress folder and list all the tests for you. You can now run tests one by one or all of them. Have fun with test driven development!
   
 ### Code analysis
 #### Kibit

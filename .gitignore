@@ -20,3 +20,4 @@ pom.xml.asc
 /config/dev.cljs
 /config/prod.cljs
 /src/cljs/coffeepot/envconfig.cljs
+package.json

@@ -13,18 +13,6 @@
               [coffeepot.components.styles :as styles]
               [coffeepot.firebase :as firebase]))
 
-(defn google-provider []
-  (new js/firebase.auth.GoogleAuthProvider))
-
-(defn email-sign-in []
-  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-    (.signInWithEmailAndPassword (.auth @firebase-app) "nakki@noemail.com" "nakkitest")))
-
-(defn google-sign-in []
-  (debug "loggin in")
-  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-    (.signInWithPopup (.auth @firebase-app) (google-provider))))
-
 (defn login-with-options []
   [re-com/h-box
    :justify :center
@@ -34,8 +22,7 @@
                :children [
                           [re-com/button
                            :attr {:id "google-sign-in"}
-                           :on-click (fn [e]
-                                       (google-sign-in))
+                           :on-click #(firebase/signInWithProvider :google)
                            :label [re-com/h-box
                                    :width "200px"
                                    :children [[:img {:src "images/g-logo.png"
@@ -86,7 +73,7 @@
                                :align :center
                                :child [re-com/button
                                        :attr {:id "email-sign-in"}
-                                       :on-click email-sign-in
+                                       :on-click #(firebase/email-sign-in @email-address @password)
                                        :style {:color "white"
                                                :background-color "green"}
                                        :label [re-com/h-box

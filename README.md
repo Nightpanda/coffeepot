@@ -129,6 +129,9 @@ to your own database or tweak your own user-data for example.
 
 To set a base structure for coffeepot in your firebase database.
  > $ firebase database:set / cypress/fixtures/base-setup-database.json
+ 
+Import the needed authed user for Cypress tests by running the following command (this will not overwrite your other authed accounts).
+ > $ firebase auth:import cypress/fixtures/firebase-authed-users.json
 
 ### Testing
 #### Cypress testing

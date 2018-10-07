@@ -11,7 +11,7 @@ describe('User login', () => {
         cy.get('#email-sign-in').should('be.visible')
     })
 
-    it('is not possible with wrong email', () => {
+    it('is not possible with wrong password', () => {
         cy.get('#sign-in').click()
         const emailInput = cy.get('#email-address-input')
         emailInput.type('nakki@noemail.com')

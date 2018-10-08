@@ -11,6 +11,14 @@
         :authDomain (:authDomain env/firebase)
         :databaseURL (:databaseURL env/firebase)})
 
+(defn create-email-user [email password]
+  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
+    (.createUserWithEmailAndPassword (.auth @firebase-app) email password)))
+
+(defn email-sign-in [email password]
+  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
+    (.signInWithEmailAndPassword (.auth @firebase-app) email password)))
+
 (defn initialize-firebase []
   (.log js/console firebase-config)
   (re-frame/dispatch [::events/firebase (js/firebase.initializeApp firebase-config)]))

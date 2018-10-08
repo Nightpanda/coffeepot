@@ -41,6 +41,7 @@
                                     {:icon "https://lipis.github.io/flag-icon-css/flags/1x1/gb.svg"
                                      :on-click (fn [] (re-frame/dispatch [::events/change-locale :en]))}]
                  :rightmost-buttons [{:label (localize :signup)
+                                      :id "sign-up"
                                       :on-click (fn login-click [e]
                                                   (re-frame/dispatch [::events/sub-view :sign-up]))}
                                      {:label (localize-with-substitute :login (localize :google))

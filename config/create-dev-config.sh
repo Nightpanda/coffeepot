@@ -14,6 +14,6 @@ else
         echo "${devConfigFileName} not found, creating a boilerplate for you!"
         touch dev.cljs
         echo -e '(ns coffeepot.envconfig) \n' > dev.cljs
-        echo -e '(def firebase {:apiKey "your-api-key" :authDomain "your-auth-domain" :databaseUrl "your-database-url"})' >> dev.cljs
+        echo -e '(def firebase {:apiKey "your-api-key" :authDomain "your-auth-domain" :databaseURL "your-database-url"})' >> dev.cljs
     fi
 fi

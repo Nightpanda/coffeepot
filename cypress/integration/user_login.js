@@ -1,17 +1,44 @@
 import config from '../fixtures/config.js'
 
-describe('User', () => {
-  it('logins with email', () => {
-    cy.visit(config.devHostAddress)
-    //Setup the test data
-    //Firebase login is required at CLI
-   //database is determined by firebase login
-    cy.exec('firebase database:set /users cypress/fixtures/coffeepot.json --confirm')
-    cy.get('#sign-in').click()
-    const googleLogin = cy.get('#google-sign-in')
-    const emailLogin = cy.get('#email-sign-in')
-    emailLogin.contains('Kirjaudu sisään sähköposti:lla')
-    emailLogin.click()
-    cy.contains('Olisiko aika keittää kahvit?')
-  })
+describe('User login', () => {
+    beforeEach(function () {
+        cy.visit(config.devHostAddress)
+    })
+
+    it('has options for google and email login', () => {
+        cy.get('#sign-in').click()
+        cy.get('#google-sign-in').should('be.visible')
+        cy.get('#email-sign-in').should('be.visible')
+    })
+
+    it('is not possible with wrong email', () => {
+        cy.get('#sign-in').click()
+        const emailInput = cy.get('#email-address-input')
+        emailInput.type('nakki@noemail.com')
+        const passwordInput = cy.get('#email-password-input')
+        passwordInput.type('nakkinen')
+        const emailSignIn = cy.get('#email-sign-in')
+        emailSignIn.click()
+        cy.get('#description-box').should('not.exist')
+    })
+
+    it('is possible with email', () => {
+        cy.get('#sign-in').click()
+        const emailInput = cy.get('#email-address-input')
+        emailInput.type('nakki@noemail.com')
+        const passwordInput = cy.get('#email-password-input')
+        passwordInput.type('nakkitest')
+        const emailSignIn = cy.get('#email-sign-in')
+        emailSignIn.click()
+        cy.contains('Olisiko aika keittää kahvit?')
+        let welcomeMessage = ''
+        cy.fixture('base-setup-database.json').then((coffeepotData) => {
+            const userData = coffeepotData.users.Gu9kQ59kPtQFvRIVnnkABnxB3Iy1
+            const username = userData.username
+            const description = userData.description
+            welcomeMessage = `Hei käyttäjä ${username} Kuvauksesi oli ${description}`
+        })
+        cy.get('#description-box').should('contain', welcomeMessage)
+    })
+
 })

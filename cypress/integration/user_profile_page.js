@@ -8,6 +8,9 @@ const loginUser = (email, password) => {
   cy.get('#email-sign-in').click()
 }
 
+const profilePageLinkId = '#profile-page-link'
+const profilePageHeader = '#profile-page-header'
+
 describe('Logged in user', () => {
 
   beforeEach(() => {
@@ -15,7 +18,13 @@ describe('Logged in user', () => {
   })
 
   it('can see profile page link', () => {
-    cy.get('#profile-page-link').should('be.visible')
+    cy.get(profilePageLinkId).should('be.visible')
   })
+
+  it('can access profile page', () => {
+    cy.get(profilePageLinkId).click()
+    cy.get(profilePageHeader).should('be.visible')
+  })
+
 
 })

@@ -52,6 +52,7 @@
                       :hello "Tervehdys {1}"
                       :welcome-coffeepot "Tervetuloa käyttämään Coffeepottia"
                       :profile-page-link "Asetuksesi"
+                      :profile-page-header "Hallinnoi tiliäsi"
                       }
                  :en {
                       :app-title "Coffeepot"
@@ -101,6 +102,7 @@
                       :hello "Hello {1}"
                       :welcome-coffeepot "Welcome to Coffeepot."
                       :profile-page-link "Your settings"
+                      :profile-page-header "Manage your account"
                       }
                  :tongue/fallback :fi
                  })

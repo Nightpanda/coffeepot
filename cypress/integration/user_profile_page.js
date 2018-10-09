@@ -10,6 +10,8 @@ const loginUser = (email, password) => {
 
 const profilePageLinkId = '#profile-page-link'
 const profilePageHeader = '#profile-page-header'
+const profilePageUsernameId = '#profile-page-username'
+const profilePageDescriptionId = '#profile-page-description'
 
 describe('Logged in user', () => {
 
@@ -25,6 +27,20 @@ describe('Logged in user', () => {
     cy.get(profilePageLinkId).click()
     cy.get(profilePageHeader).should('be.visible')
   })
+})
 
+describe('Profile page', () => {
 
+  beforeEach(() => {
+    loginUser('nakki@noemail.com', 'nakkitest')
+    cy.get(profilePageLinkId).click()
+  })
+
+  it('contains username', () => {
+    cy.get(profilePageUsernameId).should('be.visible')
+  })
+
+  it('contains user description', () => {
+    cy.get(profilePageDescriptionId).should('be.visible')
+  })
 })

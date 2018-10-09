@@ -34,7 +34,10 @@
                      :search-field {:placeholder (localize :search)
                                     :search (fn []
                                               ["Paulig" "Juhla Mokka" "Brazil" "Kulta Katriina"])}
-                     :rightmost-buttons [{:label (localize :logout)
+                     :rightmost-buttons [{:id "profile-page-link"
+                                          :label (localize :profile-page-link)
+                                          :on-click (js/console.log "We should be going now!")}
+                                         {:label (localize :logout)
                                           :on-click (fn logout-click [e]
                                                       (firebase/logout-auth))}]]
                     [c/app-content

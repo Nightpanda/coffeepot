@@ -1,7 +1,17 @@
-language: clojure
-lein: lein
-script: 
-- touch src/cljs/coffeepot/envconfig.cljs
-- echo "(ns coffeepot.envconfig) (def firebase {})" > src/cljs/coffeepot/envconfig.cljs	
-- lein cljsbuild once min
-- rm src/cljs/coffeepot/envconfig.cljs
+matrix:
+  include:
+  - language: clojure
+    lein: lein
+    cache:
+      directories:
+        - node_modules
+    script:
+    - "./init-dev.sh test"
+    - lein clean
+    - lein cljsbuild once min
+    - lein npm install superstatic
+    - node_modules/superstatic/bin/server --port 3449 -host 127.0.0.1 &
+    - lein npm run ui-test
+before_install:
+- openssl aes-256-cbc -K $encrypted_8bb7861d851b_key -iv $encrypted_8bb7861d851b_iv
+  -in test.cljs.enc -out config/test.cljs -d

@@ -114,10 +114,10 @@
                :align :center
                :children [[ui/card-text (localize :select-sign-up-method)]
                           [re-com/button
+                           :attr {:id "google-sign-up"}
                            :on-click (fn []
                                        (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-                                         (firebase/signInWithProvider :google)
-                                         ))
+                                         (firebase/signInWithProvider :google)))
                            :label [re-com/h-box
                                    :width "200px"
                                    :children [[:img {:src "images/g-logo.png"
@@ -156,6 +156,7 @@
                                                :align :center
                                                :gap "0.2em"
                                                :children [[re-com/input-text
+                                                           :attr {:id "email-address-input"}
                                                            :width "90%"
                                                            :model ""
                                                            :change-on-blur? false
@@ -169,6 +170,7 @@
                                                :align :center
                                                :gap "0.2em"
                                                :children [[re-com/input-text
+                                                           :attr {:id "email-password-initial-input"}
                                                            :width "90%"
                                                            :model ""
                                                            :input-type :password
@@ -180,6 +182,7 @@
                                                :align :center
                                                :gap "0.2em"
                                                :children [[re-com/input-text
+                                                           :attr {:id "email-password-confirmation-input"}
                                                            :width "90%"
                                                            :model ""
                                                            :input-type :password
@@ -193,9 +196,12 @@
                                   [re-com/box
                                    :padding "2em 0em 0em 0em"
                                    :child [re-com/button
+                                           :attr {:id "sign-up-continue"}
                                            :on-click (fn []
                                                        (if (true? signup-data-ok?)
-                                                         (reset! step 1)))
+                                                         (do
+                                                           (firebase/create-email-user @email-address @password)
+                                                           (reset! step 1))))
                                            :style {:color "white"
                                                    :background-color (if (true? signup-data-ok?) "green" "gray")}
                                            :disabled? (not signup-data-ok?)
@@ -208,6 +214,7 @@
                                                                :child (localize :continue)]]]]]]]
                       [re-com/v-box
                        :children [[re-com/button
+                                   :attr {:id "email-sign-up"}
                                    :on-click #(reset! email-signup-open? (not @email-signup-open?))
                                    :label [re-com/h-box
                                            :width "200px"
@@ -235,7 +242,7 @@
     [firebase/listen-firebase-db (str "usernames/")
      (fn [usernames]
        (let [username-unique? (if (some? @usernames)
-                                (empty? (filter #(= % @new-username) (js/Object.keys @usernames)))
+                                (empty? (filter #(= (str/lower-case %) (str/lower-case @new-username)) (js/Object.keys @usernames)))
                                 false)
              username-length-ok? (>= (count (str/trim @new-username)) user-name-min-length)
              username-valid? (and (true? username-unique?) (true? username-length-ok?))
@@ -254,6 +261,7 @@
                                   :align :center
                                   :gap "0.1em"
                                   :children [[re-com/input-text
+                                              :attr {:id "username-input"}
                                               :width "90%"
                                               :model ""
                                               :change-on-blur? false
@@ -275,12 +283,14 @@
                                                             :body (localize :username-taken)
                                                             :close-button? false]]))]]]]
                      [re-com/checkbox
+                      :attr {:id "agree-user-terms"}
                       :model @terms-accepted?
                       :label (localize :terms-read-and-accepted) ;;add link to terms. Clicking terms/käyttöehdot (italic) open those
                       :on-change (fn [new-value]
                                    (reset! terms-accepted? new-value))]
                      [re-com/box
                       :child [re-com/button
+                              :attr {:id "create-account"}
                               :on-click (fn []
                                           (firebase/save-username-uid! @user-uid @new-username)
                                           (re-frame/dispatch [::events/sub-view ""]))

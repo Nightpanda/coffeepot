@@ -13,18 +13,6 @@
               [coffeepot.components.styles :as styles]
               [coffeepot.firebase :as firebase]))
 
-(defn google-provider []
-  (new js/firebase.auth.GoogleAuthProvider))
-
-(defn email-sign-in []
-  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-    (.signInWithEmailAndPassword (.auth @firebase-app) "nakki@noemail.com" "nakkitest")))
-
-(defn google-sign-in []
-  (debug "loggin in")
-  (let [firebase-app (re-frame/subscribe [::subs/firebase-app])]
-    (.signInWithPopup (.auth @firebase-app) (google-provider))))
-
 (defn login-with-options []
   [re-com/h-box
    :justify :center
@@ -33,8 +21,8 @@
                :align :center
                :children [
                           [re-com/button
-                           :on-click (fn [e]
-                                       (google-sign-in))
+                           :attr {:id "google-sign-in"}
+                           :on-click #(firebase/signInWithProvider :google)
                            :label [re-com/h-box
                                    :width "200px"
                                    :children [[:img {:src "images/g-logo.png"
@@ -64,6 +52,7 @@
                                            :align :center
                                            :gap "0.2em"
                                            :children [[re-com/input-text
+                                                       :attr {:id "email-address-input"}
                                                        :model ""
                                                        :change-on-blur? false
                                                        :on-change (fn [new-value]
@@ -73,6 +62,7 @@
                                            :align :center
                                            :gap "0.2em"
                                            :children [[re-com/input-text
+                                                       :attr {:id "email-password-input"}
                                                        :model ""
                                                        :input-type :password
                                                        :change-on-blur? false
@@ -82,7 +72,8 @@
                               [re-com/box
                                :align :center
                                :child [re-com/button
-                                       :on-click email-sign-in
+                                       :attr {:id "email-sign-in"}
+                                       :on-click #(firebase/email-sign-in @email-address @password)
                                        :style {:color "white"
                                                :background-color "green"}
                                        :label [re-com/h-box

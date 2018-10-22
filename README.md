@@ -120,6 +120,18 @@ To build the app and deploy it to your Firebase account's hosting site (asks for
 #### Deploy Firebase DB rules
 To deploy the database rules set in database_rules.json to Firebase
  > $ firebase deploy --only database
+ 
+#### (Optional) Deploy base dataset to DB
+*Warning* This will overwrite your entire database.
+
+This is mostly needed for the current cypress tests. You can either set the required data manually
+to your own database or tweak your own user-data for example.
+
+To set a base structure for coffeepot in your firebase database.
+ > $ firebase database:set / cypress/fixtures/base-setup-database.json
+ 
+Import the needed authed user for Cypress tests by running the following command (this will not overwrite your other authed accounts).
+ > $ firebase auth:import cypress/fixtures/firebase-authed-users.json
 
 ### Testing
 #### Cypress testing

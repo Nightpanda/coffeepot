@@ -51,6 +51,9 @@
                       :next "Seuraava"
                       :hello "Tervehdys {1}"
                       :welcome-coffeepot "Tervetuloa käyttämään Coffeepottia"
+                      :profile-page-link "Asetuksesi"
+                      :profile-page-header "Hallinnoi tiliäsi"
+                      :user-description "Vapaa kuvauksesi"
                       }
                  :en {
                       :app-title "Coffeepot"
@@ -99,6 +102,9 @@
                       :next "Next"
                       :hello "Hello {1}"
                       :welcome-coffeepot "Welcome to Coffeepot."
+                      :profile-page-link "Your settings"
+                      :profile-page-header "Manage your account"
+                      :user-description "Personal description"
                       }
                  :tongue/fallback :fi
                  })

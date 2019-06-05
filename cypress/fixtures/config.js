@@ -1,4 +1,4 @@
 export default
 {
-    'devHostAddress': 'http://localhost:3449'
+    'devHostAddress': 'http://localhost:9500'
 }

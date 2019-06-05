@@ -14,10 +14,10 @@ pom.xml.asc
 .firebaserc
 *.log
 /resources/public/js/compiled/
+/resources/public/js/webworker/
 /public/js/compiled/
 *.vscode/
 /node_modules
 /config/dev.cljs
 /config/prod.cljs
 /src/cljs/coffeepot/envconfig.cljs
-package.json

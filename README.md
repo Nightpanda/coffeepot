@@ -50,7 +50,8 @@ $ git config --global core.autocrlf true
 #### Install dependencies
 ```
 $ lein install
-$ lein npm install
+$ npm init -y
+$ npm install cypress --save-dev
 ```
 
 #### Set up Firebase account

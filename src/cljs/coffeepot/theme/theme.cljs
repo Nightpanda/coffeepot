@@ -5,7 +5,7 @@
   {:palette {
              :primary1Color "#ffffff"
              :textColor "#1d1b1b"
-             :alternateTextColor "#d50038"
+             :alternateTextColor "#c30000"
              :accent2Color "#000000"
              :accent1Color "#000000"
              :tableDetailsBackgroundColor (color "grey100")

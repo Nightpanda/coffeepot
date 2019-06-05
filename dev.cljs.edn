@@ -1,0 +1,7 @@
+^{:css-dirs ["resources/public/css"]}
+^{:watch-dirs ["src/cljs"]}
+{:main                 coffeepot.core
+ :preloads             [devtools.preload
+                       re-frisk.preload]
+ :source-map-timestamp true
+ :external-config      {:devtools/config {:features-to-install :all}}}

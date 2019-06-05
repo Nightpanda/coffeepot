@@ -1,0 +1,4 @@
+^{:watch-dirs ["src/webworkers"]}
+{:main          webworkers.serviceworker
+ :target        :webworker
+ :optimizations :none}

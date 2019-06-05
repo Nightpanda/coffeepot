@@ -2,7 +2,7 @@
 
 (def colors
   {:headerfooter-bg-color "#ffffff"
-   :header-title-color "#d50038"
+   :header-title-color "#c30000"
    :header-border-color "#747474"
    :title-color "#f9f9f9"
    :text-color "#1d1b1b"

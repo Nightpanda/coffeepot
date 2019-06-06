@@ -30,6 +30,13 @@ We use Trello to organize our development.
  - Firebase (hosting and database)
 
 ### How to start
+#### Important git business
+This project probably receives commits and is being worked on with both CRLF and LF line endings. This means that you should set your git config to handle pulling and pushing files with correct line endings for your OS.
+
+```
+$ git config --global core.autocrlf true
+```
+
 #### Get the codes
 - Make sure you have git installed
 - Clone the Coffeepot repo to your computer:

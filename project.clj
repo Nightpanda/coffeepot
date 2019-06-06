@@ -12,7 +12,11 @@
                  [re-com "2.1.0"]
                  [re-frisk "0.5.3"]
                  [com.taoensso/timbre "4.10.0"]
-                 [tongue "0.2.3"]]
+                 [tongue "0.2.3"]
+		 [org.clojure/clojure "1.2.1"]
+                 [org.clojure/clojure-contrib "1.2.0"]
+		 [org.clojure/java.jdbc "0.0.6"]
+		 [mysql/mysql-connector-java "5.1.6"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
 	    [lein-npm "0.6.2"]]

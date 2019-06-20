@@ -22,7 +22,10 @@
 	    [lein-npm "0.6.2"]]
 
   :npm {:devDependencies [[cypress "2.1.0"]
-                          [firebase-tools "3.18.5"]]
+                          [firebase-tools "3.18.5"]
+			  [sequelize "5.8.10"]
+			  [sequelize-cli "5.5.0"]
+			  [mysql2 "1.6.5"]]
 	:package
           {:scripts
            {:cypress ".\\node_modules\\.bin\\cypress open"

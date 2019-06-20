@@ -27,7 +27,7 @@ We use Trello to organize our development.
  - Reagent
  - Material UI
  - re-com
- - Firebase (hosting and database)
+ - MySQL
 
 ### How to start
 #### Get the codes
@@ -44,6 +44,23 @@ We use Trello to organize our development.
 ```
 $ lein install
 $ lein npm install
+$ ./install-my-sql.sh
+```
+#### Migrate database
+Going up:
+```
+$ node_modules/.bin/sequelize db:migrate
+```
+Undoing migration:
+```
+$ node_modules/.bin/sequelize db:migrate:undo
+```
+#### Seed database
+Sequelize can be used to seed data to the database.
+
+```
+$ node_modules/.bin/sequelize db:seed --seed 20190621163301-demo-user.js
+$ node_modules/.bin/sequelize db:seed:undo --seed 20190621163301-demo-user.js
 ```
 
 #### Set up Firebase account
@@ -103,6 +120,12 @@ If no project is currently active or the active project is not the correct one, 
 
 #### Start the app locally
  > $ ./start-coffeepot.sh
+
+####
+Access locally running MySQL database as root.
+```
+$ mysql -u root -h localhost -p
+```
 
 ### Deployment
 #### Firebase tools

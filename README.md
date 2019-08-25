@@ -27,7 +27,7 @@ We use Trello to organize our development.
  - Reagent
  - Material UI
  - re-com
- - Firebase (hosting and database)
+ - MySQL
 
 ### How to start
 #### Important git business
@@ -54,64 +54,85 @@ $ npm init -y
 $ npm install cypress --save-dev
 ```
 
-#### Set up Firebase account
+#### MySQL database
 
- 1. Login and open the developer console at [Google Firebase](https://firebase.google.com/)
- 2. Add a project
-    - Give your project a name and click 'Continue' and the click 'Create project'
-    - When your project has been created click 'Continue' and the project overview opens up
- 3. Select 'Authentication' from the menu on the left
- 4. Click 'Set up sign-in method'
- 5. Select sign-in methods
-    - Enable Email/Password
-    - Enable Google
- 6. Select 'Database' from the menu on the left
- 7. Scroll down to 'Realtime Database' and click 'Create database'
- 8. Select 'Start in test mode' and click 'Enable'
- 9. Select 'Hosting' from the menu on the left
-10. Install Firebase tools
-	```
-	$ npm install -g firebase-tools
-	```
-11. After installing Firebase command line tools, click 'Continue'
-12. Finish setting up hosting
-    - Sign in to Google
-	    ```
-		$ firebase login
-		```
-    - Initiate your project
-	    ```
-		$ firebase init
-		```
-13. Get your project details
-    - Select 'Authentication' from the menu on the left
-    - Click 'Web setup'
-    - At least make a mental note of
-      - apiKey
-      - authDomain
-      - databaseURL
+##### Database tool such as DBeaver
 
-#### Make sure the project is active for Firebase CLI      
+First download your choice of database tool with MySQL compatibility. Here we install DBeaver.
+DBeaver can be downloaded from: https://dbeaver.io/download/
 
-List available Firebase projects
- > $ firebase list
+DBeaver can be started with:
+```
+$ dbeaver
+```
 
-Show active project
- > $ firebase use
+##### Installation
 
-If no project is currently active or the active project is not the correct one, activate another project
- > $ firebase use my-project-id
+MySQL database can be installed directly on your machine
+```
+$ ./db/scripts/install-mysql.sh
+```
+  
+or it can be run in a docker container
+  
+First add yourself to docker group
+```
+$ sudo groupadd docker
+$ sudo usermod -aG docker $USER
+$ newgrp docker #OR maybe better that you restart your computer
+```
 
-#### Set up environmental config for Firebase account
+Create and start the database.
+```
+$ ./db/scripts/create-mysql-docker.sh
+``` 
 
-[Environmental configs for Firebase](config/README.md#firebase)
+Get into the MySQL and create a database for coffeepot. Default password for user root: root
+``` 
+$ docker exec -it coffee-devdb mysql -uroot -p
+mysql> CREATE DATABASE coffeepot_dev;
+``` 
+
+#### Access locally running MySQL database as root.
+```
+$ mysql -u root -h localhost -p
+```
+
+#### Access docker MySQL database as root.
+```
+$ docker exec -it coffee-devdb mysql -uroot -p
+```
+
+
+##### Setup DBeaver
+
+Driver properties tab and set allowPublicKeyRetrieval to true
+
+
+
+#### Migrate database
+Going up:
+```
+$ node_modules/.bin/sequelize db:migrate
+```
+Undoing migration:
+```
+$ node_modules/.bin/sequelize db:migrate:undo
+```
+
+#### Seed database
+Sequelize can be used to seed data to the database.
+```
+$ node_modules/.bin/sequelize db:seed --seed db/seeders/20190621163301-demo-user.js
+$ node_modules/.bin/sequelize db:seed:undo --seed db/seeders/20190621163301-demo-user.js
+```
 
 #### Initialize app for development
  > $ ./init-dev.sh
 
 #### Start the app locally
  > $ ./start-coffeepot.sh
-
+ 
 ### Deployment
 #### Firebase tools
 To deploy the app with Firebase hosting, firebase tools must be installed with npm:

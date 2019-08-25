@@ -1,8 +1,8 @@
 {
   "name": "coffeepot",
   "version": "1.0.0",
-  "description": "Coffeepot is a social networking service for coffee lovers. With Coffeepot, users can rate and share their coffee experiences.   > Coffeepot is a social network web app that allows users to post and share their:   > - brewed coffees   > - drank coffee (self or barista made)   > - brew recipes   > - favorite beans, roasteries, cafes etc.   >     >  Brewing and drinking coffee also earns the users badges/achievements",
+    "description": "Coffeepot is a social networking service for coffee lovers. With Coffeepot, users can rate and share their coffee experiences.",
   "scripts": {
-    "cypress:open": "cypress open"
+      "cypress:open": "cypress open"
   }
 }

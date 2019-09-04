@@ -1,15 +1,5 @@
 {
   "name": "coffeepot",
   "version": "1.0.0",
-  "description": "Coffeepot is a social networking service for coffee lovers. With Coffeepot, users can rate and share their coffee experiences.",
-  "scripts": {
-    "cypress": "cypress open"
-  },
-  "dependencies": {
-    "mysql2": "^1.7.0",
-    "sequelize": "file://node_modules/sequelize"
-  },
-  "devDependencies": {
-    "sequelize-cli": "^5.5.1"
-  }
+  "description": "Coffeepot is a social networking service for coffee lovers. With Coffeepot, users can rate and share their coffee experiences."
 }

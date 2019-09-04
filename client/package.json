@@ -1,0 +1,7 @@
+{
+  "name": "coffeepot_client",
+  "version": "1.0.0",
+  "scripts": {
+    "cypress": "cypress open"
+  }
+}

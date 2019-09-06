@@ -1,7 +1,7 @@
-{"users": [
 {
   "localId": "Gu9kQ59kPtQFvRIVnnkABnxB3Iy1",
-  "email": "nakki@noemail.com",
+  "email": "demouser@noemail.com",
+  "password": "demo",
   "emailVerified": false,
   "passwordHash": "eU24OWxW9mQ5wE8tAm1x1ePEBV2QOBxGEj8iaI/W5O19nhhizV6zrQgDX8cdxSO2BAjkge/eRl7oY1A6bly3UA==",
   "salt": "oUg+wl5bumGBQg==",
@@ -9,4 +9,3 @@
   "createdAt": "1526960237000",
   "providerUserInfo": []
 }
-]}

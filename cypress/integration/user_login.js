@@ -24,10 +24,12 @@ describe('User login', () => {
 
     it('is possible with email', () => {
         cy.get('#sign-in').click()
-        const emailInput = cy.get('#email-address-input')
-        emailInput.type('nakki@noemail.com')
-        const passwordInput = cy.get('#email-password-input')
-        passwordInput.type('nakkitest')
+        cy.fixture('user.json').then((userJson) => {
+            const emailInput = cy.get('#email-address-input')
+            emailInput.type(userJson.email)
+            const passwordInput = cy.get('#email-password-input')
+            passwordInput.type(userJson.password)
+        })
         const emailSignIn = cy.get('#email-sign-in')
         emailSignIn.click()
         cy.contains('Olisiko aika keittää kahvit?')

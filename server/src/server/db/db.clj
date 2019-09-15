@@ -21,3 +21,7 @@
        :createdat (:createdat user)
        :updatedat (:updatedat user)})
     user))
+
+(defn save-user-to-db [email password]
+  (let [user (first (sql/insert! database :Users {:email email :password password}))]
+    user))

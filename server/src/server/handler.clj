@@ -52,7 +52,13 @@
                      :return User
                      :query-params [email :- s/Str, password :- s/Str]
                      :summary "Authenticates user or something."
-                     (ok (authenticate-user email password)))))))
+                     (ok (authenticate-user email password)))
+               (POST "/user" []
+                     :return s/Any
+                     :query-params [email :- s/Str, password :- s/Str]
+                     :summary "Create new user."
+                     (ok (db/save-user-to-db email password)))
+))))
 
 (def app
   (-> app-routes

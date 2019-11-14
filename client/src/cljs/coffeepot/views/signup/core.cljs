@@ -136,6 +136,9 @@
 
 (def password-min-length 6)
 
+(defn create-email-user [email password]
+  )
+
 (defn sign-up-with-email [email-signup-open? step]
   (let [email-address (r/atom "")
         password (r/atom "")
@@ -205,7 +208,7 @@
                                            :on-click (fn []
                                                        (if (true? signup-data-ok?)
                                                          (do
-                                                           ;;(firebase/create-email-user @email-address @password)
+                                                           (create-email-user @email-address @password)
                                                            (reset! step 1))))
                                            :style {:color "white"
                                                    :background-color (if (true? signup-data-ok?) "green" "gray")}

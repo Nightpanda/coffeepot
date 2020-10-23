@@ -21,13 +21,16 @@
 
   :profiles
   {:dev
-   {:dependencies [[com.bhauman/figwheel-main "0.2.0"]
+   {:repositories [["GCS Maven Central mirror EU" "https://maven-central-eu.storage-download.googleapis.com/repos/central/data/"]]
+    :dependencies [[com.bhauman/figwheel-main "0.2.0"]
                    [com.bhauman/rebel-readline-cljs "0.1.4"]
                    [binaryage/devtools "0.9.4"]]
     :resource-paths ["target"]
     :source-paths   ["src/cljs" "src/webworkers"]
     :clean-targets ^{:protect false} ["target"]
-    :plugins      [[lein-kibit "0.1.6"]]}}
+    :plugins      [[lein-kibit "0.1.6"]
+                   [lein-cljsbuild "1.1.7"]]}}
 
-  :aliases {"dev" ["trampoline" "run" "-m" "figwheel.main" "-bb" "webworker" "-b" "dev" "-r"]}
+  :aliases {"dev" ["trampoline" "run" "-m" "figwheel.main" "-bb" "webworker" "-b" "dev" "-r"]
+            "travis" ["trampoline" "run" "-m" "figwheel.main" "-bb" "webworker" "-b" "dev"]}
 )

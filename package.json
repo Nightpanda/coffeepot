@@ -1,5 +1,8 @@
 {
   "name": "coffeepot",
   "version": "1.0.0",
-  "description": "Coffeepot is a social networking service for coffee lovers. With Coffeepot, users can rate and share their coffee experiences."
+  "description": "Coffeepot is a social networking service for coffee lovers. With Coffeepot, users can rate and share their coffee experiences.",
+  "devDependencies": {
+    "cypress": "^3.4.1"
+  }
 }

@@ -1,11 +1,14 @@
 (ns server.db.db
-  (:require [clojure.java.jdbc :as sql]))
+  (:require [clojure.java.jdbc :as sql]
+	    [clojure.data.json :as json]))
+
+(def database-settings ((keyword (System/getenv "NODE_ENV")) (json/read-str (slurp "./db/config/config.json") :key-fn keyword))) 
 
 (def database {:dbtype "mysql"
-               :subname "//127.0.0.1:3306"
-               :dbname "coffeepot_dev"
-               :user "root"
-               :password "root"})
+               :subname (str (:host database-settings) ":3306")
+               :dbname (:database database-settings)
+               :user (:username database-settings)
+               :password (:password database-settings)})
 
 (defn get-user-from-db-for [email]
   (let [user (first (sql/query database ["select * from Users where email = ?" email]))]

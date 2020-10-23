@@ -1,11 +1,13 @@
 import config from '../fixtures/config.js'
 
-const loginUser = (email, password) => {
-  cy.visit(config.devHostAddress)
-  cy.get('#sign-in').click()
-  cy.get('#email-address-input').type(email)
-  cy.get('#email-password-input').type(password)
-  cy.get('#email-sign-in').click()
+const loginDemoUser = () => {
+    cy.fixture('user.json').then((userJson) => {
+        cy.visit(config.devHostAddress)
+        cy.get('#sign-in').click()
+        cy.get('#email-address-input').type(userJson.email)
+        cy.get('#email-password-input').type(userJson.password)
+        cy.get('#email-sign-in').click()
+    })
 }
 
 const profilePageLinkId = '#profile-page-link'
@@ -16,7 +18,7 @@ const profilePageDescriptionId = '#profile-page-description'
 describe('Logged in user', () => {
 
   beforeEach(() => {
-    loginUser('nakki@noemail.com', 'nakkitest')
+      loginDemoUser()
   })
 
   it('can see profile page link', () => {
@@ -32,7 +34,7 @@ describe('Logged in user', () => {
 describe('Profile page', () => {
 
   beforeEach(() => {
-    loginUser('nakki@noemail.com', 'nakkitest')
+      loginDemoUser()
     cy.get(profilePageLinkId).click()
   })
 
